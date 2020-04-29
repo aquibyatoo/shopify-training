@@ -1,7 +1,7 @@
 {
-  "name": "pura-vida-shopify-theme-development",
+  "name": "Anatta-Shopify-Development",
   "version": "1.0.0",
-  "description": "An empty starting point for modern Shopify theme development.",
+  "description": "Shopify theme development tool.",
   "private": true,
   "main": "webpack.config.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "add-all": "git add ."
   },
   "keywords": [],
-  "author": "@kjdointhings",
+  "author": "@monkviper",
   "license": "ISC",
   "dependencies": {
     "infinite-scroll": "^3.0.6",
