@@ -7,7 +7,7 @@
 
 ## Getting Started
 1. Clone this repo ( git clone git@github.com:anattadesign/shopify-starter.git ), rename the directory to your project.
-2. Open in terminal and and run `yarn install` to install all dependencies.
+2. Open in terminal and and run `npm install` to install all dependencies.
 3. In Shopify, copy the theme ID for the new theme, then update the `<PASSWORD>`, `THEME_ID`, and `STORE_URL` in **config.yml** with your store & theme details.
 4. Your `config.yml` file should look like this: 
     ```
@@ -19,25 +19,25 @@
       ignore_files:
         - config/settings_data.json
     ```
-5. Run `yarn start` to run your first Webpack build and start watching for file changes to be uploaded to Shopify.
+5. Run `npm start` to run your first Webpack build and start watching for file changes to be uploaded to Shopify.
 
 ## Configuration
 
 #### Commands
-`yarn start`
+`npm start`
 - Completes a Webpack build in **development** mode
 - Webpack begins watching for file changes
 - Theme Kit begins watching for file changes in `dist/`
 - Theme Kit opens your development theme in your default browser
 
-`yarn run build`
+`npm run build`
 - Completes a Webpack build in **production** mode
 
-`yarn run deploy`
+`npm run deploy`
 - Completes a Webpack build in **production** mode
 - Deploys and overwrites all theme files via Theme Kit
 
-`yarn run eslint`
+`npm run eslint`
 - Lint all JavaScript files in `src/js`
 
 #### Entry Points

@@ -1,1 +1,1 @@
-import "Styles/templates/gift_card.scss";
+import 'Styles/templates/gift_card.scss';

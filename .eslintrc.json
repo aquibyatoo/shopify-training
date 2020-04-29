@@ -4,7 +4,10 @@
 		"es6": true,
 		"node": true
 	},
-	"extends": ["eslint:recommended"],
+	"extends": [
+		"eslint:recommended",
+		"airbnb-base"
+	],
 	"globals": {
 		"Atomics": "readonly",
 		"SharedArrayBuffer": "readonly"
@@ -15,6 +18,7 @@
 	},
 	"rules": {
 		"no-trailing-spaces": "error",
-		"indent": ["error", 2]
+		"indent": ["error", 2],
+		"import/no-unresolved": 0
 	}
 }

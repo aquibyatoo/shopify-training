@@ -1,1 +1,1 @@
-import "Styles/templates/search.scss";
+import 'Styles/templates/search.scss';

@@ -1,1 +1,1 @@
-import "Styles/templates/blog.scss";
+import 'Styles/templates/blog.scss';
