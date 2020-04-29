@@ -24,20 +24,20 @@
 ## Configuration
 
 #### Commands
-`yarn start`
+`npm start`
 - Completes a Webpack build in **development** mode
 - Webpack begins watching for file changes
 - Theme Kit begins watching for file changes in `dist/`
 - Theme Kit opens your development theme in your default browser
 
-`yarn run build`
+`npm run build`
 - Completes a Webpack build in **production** mode
 
-`yarn run deploy`
+`npm run deploy`
 - Completes a Webpack build in **production** mode
 - Deploys and overwrites all theme files via Theme Kit
 
-`yarn run eslint`
+`npm run eslint`
 - Lint all JavaScript files in `src/js`
 
 #### Entry Points
