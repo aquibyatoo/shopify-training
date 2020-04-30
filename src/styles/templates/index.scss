@@ -1,4 +1,5 @@
-$bg: #eaeaea;
+@import "./src/design-tokens/index";
+
 body {
-  background-color: $bg;
+  background-color: color('brand-turquoise');
 }
