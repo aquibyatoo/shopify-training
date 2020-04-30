@@ -8,8 +8,15 @@
     "start": "NODE_ENV=development webpack --watch",
     "build": "webpack",
     "deploy": "webpack && shopify-themekit deploy",
-    "eslint": "eslint \"src/js/**\"",
+    "eslint": "eslint 'src/js/**'; exit 0",
+    "stylelint": "stylelint '**/*.scss'; exit 0",
     "add-all": "git add ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run eslint && npm test",
+      "pre-push": "npm run eslint && npm test"
+    }
   },
   "keywords": [
     "shopify",
@@ -39,6 +46,7 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "glob": "^7.1.6",
+    "husky": "^4.2.5",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
