@@ -50,6 +50,7 @@ Webpack will generate a JavaScript file for each template and layout file in the
 The Theme Kit configuration file uses `dist` as the root directory for watching files to upload.
 
 #### Basic structure
+```
 ├── assets
 │   ├── favicon
 │   ├── fonts
