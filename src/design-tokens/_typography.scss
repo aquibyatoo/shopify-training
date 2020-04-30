@@ -53,7 +53,8 @@ $typography: (
 @function var-font-family($token, $fallback: false) {
   @if ($can-use-css-variables) {
     @return var-font($font: $token, $fallback: $fallback);
-  } @else {
+  }
+  @else {
     @return font-family($token);
   }
 }
@@ -62,6 +63,7 @@ $typography: (
 /// @param {string} $token - One of keys of $typography map above.
 @mixin use-text-style($token: 'body') {
   $type: get-token($typography, $token);
+
   font-family: var-font-family(get-token($type, 'font'));
   font-size: get-token($type, 'size');
   font-weight: get-token($type, 'weight');
@@ -73,6 +75,7 @@ $typography: (
 /// @param {string} $token - One of keys of $typography map above.
 @mixin update-text-style($token: 'body') {
   $type: get-token($typography, $token);
+
   font-size: get-token($type, 'size');
   line-height: get-token($type, 'height');
 }

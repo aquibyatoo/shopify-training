@@ -8,14 +8,14 @@
     "start": "NODE_ENV=development webpack --watch",
     "build": "webpack",
     "deploy": "webpack && shopify-themekit deploy",
-    "eslint": "eslint 'src/js/**'; exit 0",
-    "stylelint": "stylelint '**/*.scss'; exit 0",
+    "eslint": "eslint 'src/js/**'",
+    "stylelint": "stylelint '**/*.scss'",
     "add-all": "git add ."
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run eslint && npm test",
-      "pre-push": "npm run eslint && npm test"
+      "pre-commit": "npm run eslint && npm run stylelint",
+      "pre-push": "npm run eslint && npm run stylelint"
     }
   },
   "keywords": [
