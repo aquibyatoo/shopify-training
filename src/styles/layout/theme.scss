@@ -1,10 +1,10 @@
 @charset 'UTF-8';
 
 /* Normalization */
-// @import '~accoutrement/sass/init';
+@import '~accoutrement/sass/init';
 
 /* Design Tokens */
-// @import "design/index";
+@import "./src/styles/design/index";
 
 /* Componentns */
-// @import 'components/index';
+@import './src/styles/components/index';

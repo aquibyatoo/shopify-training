@@ -11,6 +11,8 @@
 	  	"Shopify": true
 	},
 	"rules": {		
-		"import/no-unresolved": 0
+		"import/no-unresolved": 0,
+		"comma-dangle": ["error", "never"],
+		"object-shorthand": ["error", "always", { "avoidQuotes": true }]
 	}	
 }
