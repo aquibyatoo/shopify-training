@@ -49,7 +49,105 @@ Webpack will generate a JavaScript file for each template and layout file in the
 #### Config
 The Theme Kit configuration file uses `dist` as the root directory for watching files to upload.
 
-#### ESlint (JavaScript Style Guide)
+#### Basic structure
+├── assets
+│   ├── favicon
+│   ├── fonts
+│   ├── images
+│   └── svg
+├── config
+│   └── custom Theme Settings
+├── design-tokens
+│   └── _animation.scss
+│   ├── _colors.scss
+│   ├── _layouts.scss
+│   ├── _sizes.scss
+│   ├── _typography.scss
+│   └── index.scss
+├── js / bundles
+│   ├── components
+│   │   ├── announcement.js
+│   │   └── buttons.js
+│   │   └── hero.js
+│   │   └── index.js
+│   ├── layout
+│   │   ├── theme.js
+│   │   └── optional alternate layouts
+│   └── templates
+│       ├── 404.js
+│       ├── article.js
+│       ├── blog.js
+│       ├── cart.js
+│       ├── collection.js
+│       ├── collection.list.js
+│       ├── gift_card.js
+│       ├── index.js
+│       ├── list-collections.js
+│       ├── page.contact.js
+│       ├── page.js
+│       ├── product.js
+│       └── search.js
+├── liquid
+│   ├── layout
+│   │   ├── theme.liquid
+│   │   └── optional alternate layouts
+│   ├── sections
+│   │   ├── sample.liquid
+│   │   ├── style-bundle.liquid
+│   │   └── optional alternate sections
+│   ├── snippets
+│   │   ├── script-bundle.liquid.liquid
+│   │   └── optional alternate sections
+│   └── templates
+│       ├── customers
+│       │   ├── account.liquid
+│       │   ├── activate_account.liquid
+│       │   ├── addresses.liquid
+│       │   ├── login.liquid
+│       │   ├── order.liquid
+│       │   ├── register.liquid
+│       │   └── reset_password.liquid
+│       ├── 404.liquid
+│       ├── article.liquid
+│       ├── blog.liquid
+│       ├── cart.liquid
+│       ├── collection.liquid
+│       ├── collection.list.liquid
+│       ├── gift_card.liquid
+│       ├── index.liquid
+│       ├── list-collections.liquid
+│       ├── page.contact.liquid
+│       ├── page.liquid
+│       ├── product.liquid
+│       └── search.liquid
+├── locales
+│   └── en.default.json
+├── styles
+│   ├── components
+│   │   ├── announcement.scss
+│   │   └── buttons.scss
+│   │   └── hero.scss
+│   │   └── index.scss
+│   ├── layout
+│   │   ├── theme.scss
+│   │   └── optional alternate layouts
+│   └── templates
+│       ├── 404.scss
+│       ├── article.scss
+│       ├── blog.scss
+│       ├── cart.scss
+│       ├── collection.scss
+│       ├── collection.list.scss
+│       ├── gift_card.scss
+│       ├── index.scss
+│       ├── list-collections.scss
+│       ├── page.contact.scss
+│       ├── page.scss
+│       ├── product.scss
+│       └── search.scss
+```
+
+#### ESlint (JavaScript Guidelines)
 https://github.com/airbnb/javascript
 
 #### Stylelint (Sass Guidelines)
