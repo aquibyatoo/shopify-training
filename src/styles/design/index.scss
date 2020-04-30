@@ -1,0 +1,16 @@
+// THIS FILE IS IMPORTED IN EVERY COMPONENT as '@design'.
+// DO NOT INCLUDE CODE WHICH GENERATES CSS.
+
+/// Utility library which makes defining and accessing token very easy.
+/// @link https://www.oddbird.net/accoutrement/docs/
+@import '~accoutrement/sass/tools';
+
+// Configuration
+// $can-use-css-variables: false !default;
+
+// Basic Tokens
+@import 'colors';
+@import 'sizes';
+@import 'typography';
+@import 'layouts';
+@import 'animation';

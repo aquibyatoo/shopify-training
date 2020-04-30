@@ -1,0 +1,27 @@
+/// @link https://www.oddbird.net/accoutrement/docs/scale.html
+
+$ratios: (
+  'ratio': 0.25,
+);
+
+$sizes: (
+  // define explicit values
+  'root': 16px,
+  'icons': 1em,
+  'page': 8in,
+
+  // reference existing sizes
+  'text': '#root',
+
+  // apply adjustments and conversions
+  // using named-ratios or arbitrary functions
+  'rhythm': '#root' ('_fifth': 1, 'convert-units': 'rem'),
+
+  'h1': '#root' ('ratio': 3),
+  'h2': '#root' ('ratio': 2),
+  'h3': '#root' ('ratio': 1),
+
+  'large': '#root'('ratio': 3),
+  'medium': '#root'('ratio': 2),
+  'small': '#root'('ratio': 1),
+);

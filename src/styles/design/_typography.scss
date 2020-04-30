@@ -1,0 +1,78 @@
+/// @access private
+/// @link https://www.oddbird.net/accoutrement/docs/type.html
+$font-path: '../fonts/';
+
+$fonts: (
+  'sans': (
+    'name': '',
+    'formats': 'woff2' 'woff',
+    'stack': (
+      'Arial',
+      sans-serif
+    ),
+    // Following are examples for loading fonts from S3.
+      // 'normal': 'https://fonts.googleapis.com/css?family=Cutive+Mono&display=swap',
+      // 'italic': 'https://s3-us-west-1.amazonaws.com/rothys/fonts/GillSansMTPro-BookItalic',
+      'normal': '',
+    'semibold': '',
+    'bold': ''
+  ),
+  'serif': (
+    'name': '',
+    'formats': 'woff2' 'woff',
+    'stack': (
+      'Arial',
+      serif
+    ),
+    // Following are examples for loading fonts from S3.
+      // 'normal': 'https://s3-us-west-1.amazonaws.com/rothys/fonts/PublicoBanner-Light',
+      // 'italic': 'https://s3-us-west-1.amazonaws.com/rothys/fonts/PublicoBanner-LightItalic',
+      'normal': '',
+    'bold': ''
+  ),
+  'primary': '#sans',
+  'secondary': '#serif'
+);
+
+/// @access private
+/// @see $fonts - For list of 'font' names.
+
+$typography: (
+  'body': (
+    'font': 'primary',
+    'size': 14px,
+    'height': 1,
+    'weight': 500,
+    'space': 0.5px
+  ),
+  'heading': (),
+  'button-primary': (),
+  'button-secondary': ()
+);
+
+@function var-font-family($token, $fallback: false) {
+  @if ($can-use-css-variables) {
+    @return var-font($font: $token, $fallback: $fallback);
+  } @else {
+    @return font-family($token);
+  }
+}
+
+/// Set text style.
+/// @param {string} $token - One of keys of $typography map above.
+@mixin use-text-style($token: 'body') {
+  $type: get-token($typography, $token);
+  font-family: var-font-family(get-token($type, 'font'));
+  font-size: get-token($type, 'size');
+  font-weight: get-token($type, 'weight');
+  line-height: get-token($type, 'height');
+  letter-spacing: get-token($type, 'space');
+}
+
+///  text style update- only font size and line height
+/// @param {string} $token - One of keys of $typography map above.
+@mixin update-text-style($token: 'body') {
+  $type: get-token($typography, $token);
+  font-size: get-token($type, 'size');
+  line-height: get-token($type, 'height');
+}

@@ -1,0 +1,24 @@
+/// @access private
+/// @link https://www.oddbird.net/accoutrement/docs/animate-times.html
+$times: (
+  'fast': 300ms,
+  'slow': 500ms
+);
+
+/// @access private
+/// @link https://www.oddbird.net/accoutrement/docs/animate-ease.html
+$easing: (
+  'in': ease-in,
+  'out': ease-out
+);
+
+/// @access private
+/// @link https://www.oddbird.net/accoutrement/docs/animate-change.html
+$changes: (
+  'fade': opacity time('fast') ease('out'),
+  'fade-hide': (
+    '#fade',
+    visibility time('fast') ease('out')
+  ),
+  'slide': transform time('fast')
+);

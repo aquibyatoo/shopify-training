@@ -1,0 +1,22 @@
+/// Media Breakpoints
+/// @link https://www.oddbird.net/accoutrement/docs/layout-queries.html#variable--breakpoints
+
+/// Breakpoint values, adjusted to the proper units
+/// @group config-layout
+$breakpoints: (
+  'small': 30em,
+  'medium': 48em,
+  'large': 64em,
+  'xlarge': 75em
+);
+
+/// Available Mixins
+/// @link:https://www.oddbird.net/accoutrement/docs/layout-queries.html#mixin--below
+
+/// @example
+/// @include below('mobile'){
+///   @content
+/// }
+/// @include above('tablet'){
+///   @content
+/// }

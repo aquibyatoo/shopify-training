@@ -1,0 +1,30 @@
+// Color Configuration
+// ===================
+
+// Brand Colors
+// ------------
+/// The brand is defined by our primary brand blue,
+/// along with secondary pink and orange base colors.
+/// @group config-color
+/// @colors
+/// @type Map
+$colors: (  
+  'brand-orange': #F7B267,
+  'brand-turquoise': #7ADBD4,
+  'brand-dark-blue': #114B5F,
+  'brand-blue': #00647F,
+  'brand-red': #FF595A,
+  'brand-purple': #8D6B94,
+  'brand-grey': #979797,
+  'brand-dark': '',
+  'brand-light': '',
+);
+
+$patterns: (
+  'link': '',
+  'text': '',
+  'border': '',
+  'background': '',
+);
+
+@include add-colors($colors, $patterns);
