@@ -48,3 +48,11 @@ Webpack will generate a JavaScript file for each template and layout file in the
 
 #### Config
 The Theme Kit configuration file uses `dist` as the root directory for watching files to upload.
+
+#### ESlint (JavaScript Style Guide)
+https://github.com/airbnb/javascript
+
+#### Stylelint (Sass Guidelines)
+https://github.com/stylelint/stylelint-config-standard
+
+#### Changelog
