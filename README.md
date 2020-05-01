@@ -172,7 +172,8 @@ When running `npm start`, Webpack will use a plugin that runs `shopify-themekit 
 ```
 
 #### ESlint (JavaScript Guidelines)
-https://github.com/airbnb/javascript
+The `"extends": "eslint:recommended"` property in a configuration file enables rules that report common problems, which have a check mark below.
+https://eslint.org/docs/rules/
 
 #### Stylelint (Sass Guidelines)
 https://github.com/stylelint/stylelint-config-standard
