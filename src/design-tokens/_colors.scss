@@ -1,30 +1,76 @@
-// Color Configuration
-// ===================
+// Link to source
+/// @link https://www.oddbird.net/accoutrement/docs/color.html
 
-// Brand Colors
-// ------------
-/// The brand is defined by our primary brand blue,
-/// along with secondary pink and orange base colors.
-/// @group config-color
-/// @colors
-/// @type Map
+// *** Color palette *** //
+
 $colors: (
-  'brand-orange': #F7B267,
-  'brand-turquoise': #7ADBD4,
-  'brand-dark-blue': #114B5F,
-  'brand-blue': #00647F,
-  'brand-red': #FF595A,
-  'brand-purple': #8D6B94,
-  'brand-grey': #979797,
-  'brand-dark': '',
-  'brand-light': '',
+  // Set explicit colors
+  'grey': #DFE3E8,
+  'blue': #006FBB,
+  'orange': #F49342,
+  'red': #DE3618,
+  'green': #50B83C,
+  //Lighter
+  'light-grey': #DFE3E8,
+  'light-blue': #B4E1FA,
+  'light-orange': #FFC58B,
+  'light-red': #DE3618,
+  'light-green': #50B83C,
+  //Darker
+  'dark-grey': #454F5B,
+  'dark-blue': #084E8A,
+  'dark-orange': #C05717,
+  'dark-red': #BF0711,
+  'dark-green': #108043
 );
 
-$patterns: (
+// Use color names that define the purpose of the color.
+// Example: primary or highlight or light-background
+$primary-colors: (
+  'primary': '#blue',
+  'primary-100': '#light-blue',
+  'primary-200': '#dark-blue',
+);
+
+$secondary-colors: (
+  'secondary': '#orange',
+  'secondary-100': '#light-orange',
+  'secondary-200': '#dark-orange',
+);
+
+$text-colors: (
+  'text': '#dark-grey',
+  'link': '#primary',
+  'link-hover': '#primary-100'
+);
+
+$button-colors: (
+  'button': '#primary',
+  'button-hover': '#primary-100',
+  'button-secondary': '#secondary',
+  'button-secondary-hover': '#secondary-100',
+  'button-disable': '#grey'
+);
+
+// Create your own custom pattern
+$custom-patterns: (
   'link': '',
   'text': '',
   'border': '',
   'background': '',
 );
 
-@include add-colors($colors, $patterns);
+// Merge everything into the main $colors map…
+@include add-colors(
+  $colors,
+  $primary-colors,
+  $secondary-colors,
+  $button-colors,
+  $custom-patterns
+);
+
+// Example of usage
+// .example {
+//   color: color('grey');
+//   background-color: color('light-grey');
+// }
