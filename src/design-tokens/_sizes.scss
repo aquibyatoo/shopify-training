@@ -5,23 +5,25 @@ $ratios: (
 );
 
 $sizes: (
-  // define explicit values
   'root': 16px,
-  'icons': 1em,
-  'page': 8in,
+
+  // default spacings for paddings and margins.
+  'large': '#root' ('ratio': 1 / 3),
+  'medium': '#root' ('ratio': 1 / 2),
+  'small': '#root' ('ratio': 1),
 
   // reference existing sizes
   'text': '#root',
-
-  // apply adjustments and conversions
-  // using named-ratios or arbitrary functions
-  'rhythm': '#root' ('_fifth': 1, 'convert-units': 'rem'),
-
   'h1': '#root' ('ratio': 3),
   'h2': '#root' ('ratio': 2),
   'h3': '#root' ('ratio': 1),
 
-  'large': '#root'('ratio': 3),
-  'medium': '#root'('ratio': 2),
-  'small': '#root'('ratio': 1),
+  // Page Responsive sizes
+  // =====================
+  'page': 20rem,                                // 320px (Mobile, landscape)
+  'page-mobile-large': '#page' ('times':2),     // 640px (Mobile, landscape)
+  'page-tablet': '#page' ('times': 2.4),        // 768px (Tablet, portrait)
+  'page-tablet-large': '#page' ('times': 3.2),  // 1024px (Tablet, landscape)
+  'page-desktop': '#page' ('times': 4.26875),   // 1366px (HD laptops (768p))
+  'page-desktop-large': '#page' ('times': 5.25), // 1680px (Desktop displays)
 );
