@@ -1,0 +1,15 @@
+/* Defined Buttons */
+
+button,
+.btn,
+input[type="button"] {
+  // @include use-text-style('buttons');
+  // @include padding(0.375rem, 0.75rem, 0.375rem, 0.75rem);
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}

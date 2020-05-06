@@ -52,21 +52,13 @@ $button-colors: (
   'button-disable': '#grey'
 );
 
-// Create your own custom pattern
-$custom-patterns: (
-  'link': '',
-  'text': '',
-  'border': '',
-  'background': '',
-);
-
 // Merge everything into the main $colors map…
 @include add-colors(
   $colors,
   $primary-colors,
   $secondary-colors,
-  $button-colors,
-  $custom-patterns
+  $text-colors,
+  $button-colors
 );
 
 // Example of usage

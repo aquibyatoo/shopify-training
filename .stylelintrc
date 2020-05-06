@@ -3,6 +3,7 @@
     stylelint-config-standard,
   ],  
   rules: {
+    number-no-trailing-zeros: null,
     indentation: 2,
     no-empty-source: null,
     value-list-max-empty-lines: 2,

@@ -8,20 +8,22 @@ $sizes: (
   'root': 16px,
 
   // default spacings for paddings and margins.
-  'large': '#root' ('ratio': 1 / 3),
-  'medium': '#root' ('ratio': 1 / 2),
-  'small': '#root' ('ratio': 1),
+  'large': '#root' ('times': 3),
+  'medium': '#root' ('times': 2),
+  'small': '#root' ('times': 1),
 
   // reference existing sizes
   'text': '#root',
-  'h1': '#root' ('ratio': 3),
-  'h2': '#root' ('ratio': 2),
-  'h3': '#root' ('ratio': 1),
+
+  'h1': '#root' ('times': 2.5),
+  'h2': '#root' ('times': 2.0),
+  'h3': '#root' ('times': 1.75),
+  'h4': '#root' ('times': 1.5),
 
   // Page Responsive sizes
   // =====================
   'page': 20rem,                                // 320px (Mobile, landscape)
-  'page-mobile-large': '#page' ('times':2),     // 640px (Mobile, landscape)
+  'page-mobile-large': '#page' ('times': 2),     // 640px (Mobile, landscape)
   'page-tablet': '#page' ('times': 2.4),        // 768px (Tablet, portrait)
   'page-tablet-large': '#page' ('times': 3.2),  // 1024px (Tablet, landscape)
   'page-desktop': '#page' ('times': 4.26875),   // 1366px (HD laptops (768p))
