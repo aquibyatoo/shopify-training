@@ -38,7 +38,8 @@ module.exports = {
           'src/styles/**/*',
           'src/assets/**/*',
           'src/liquid/templates/customers/*',
-          'src/liquid/snippets/**/*'
+          'src/liquid/snippets/**/*',
+          'src/design-tokens/*'
         ]
       },
       {
