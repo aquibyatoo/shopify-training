@@ -4,10 +4,12 @@
 /// Breakpoint values, adjusted to the proper units
 /// @group config-layout
 $breakpoints: (
-  'small': 30em,
-  'medium': 48em,
-  'large': 64em,
-  'xlarge': 75em
+  'mobile': size('page'),
+  'mobile-large': size('page-mobile-large'),
+  'tablet': size('page-tablet'),
+  'tablet-large': size('page-tablet-large'),
+  'desktop': size('page-desktop'),
+  'desktop-large': size('page-desktop-large'),
 );
 
 /// Available Mixins

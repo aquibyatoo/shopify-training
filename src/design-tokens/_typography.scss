@@ -1,81 +1,87 @@
 /// @access private
 /// @link https://www.oddbird.net/accoutrement/docs/type.html
-$font-path: '../fonts/';
 
+/// Defined fonts
 $fonts: (
   'sans': (
-    'name': '',
-    'formats': 'woff2' 'woff',
+    'name': 'Gotham',
+    'formats': 'woff2',
     'stack': (
       'Arial',
-      sans-serif
+      sans-serif,
     ),
-    // Following are examples for loading fonts from S3.
-      // 'normal': 'https://fonts.googleapis.com/css?family=Cutive+Mono&display=swap',
-      // 'italic': 'https://s3-us-west-1.amazonaws.com/rothys/fonts/GillSansMTPro-BookItalic',
-      'normal': '',
-    'semibold': '',
-    'bold': ''
-  ),
-  'serif': (
-    'name': '',
-    'formats': 'woff2' 'woff',
-    'stack': (
-      'Arial',
-      serif
-    ),
-    // Following are examples for loading fonts from S3.
-      // 'normal': 'https://s3-us-west-1.amazonaws.com/rothys/fonts/PublicoBanner-Light',
-      // 'italic': 'https://s3-us-west-1.amazonaws.com/rothys/fonts/PublicoBanner-LightItalic',
-      'normal': '',
-    'bold': ''
+    'normal': '~assets/fonts/Gotham-Book',
+    'italic': '~assets/fonts/Gotham-BookItalic',
+    '300': '~assets/fonts/Gotham-Light',
+    '300 italic': '~assets/fonts/Gotham-LightItalic',
+    '500': '~assets/fonts/Gotham-Medium',
+    '500 italic': '~assets/fonts/Gotham-MediumItalic',
+    '700': '~assets/fonts/Gotham-Bold',
+    '700 italic': '~assets/fonts/Gotham-BoldItalic',
   ),
   'primary': '#sans',
-  'secondary': '#serif'
 );
-
-/// @access private
-/// @see $fonts - For list of 'font' names.
 
 $typography: (
   'body': (
-    'font': 'primary',
-    'size': 14px,
+    'font': '#primary',
+    'size': size('text'),
     'height': 1,
-    'weight': 500,
+    'weight': normal,
     'space': 0.5px
   ),
-  'heading': (),
+  'heading': (
+    'font': '#primary',
+    'weight': 500,
+  ),
+  'heading-1': (
+    'size': size('h1')
+  ),
+  'heading-2': (
+    'size': size('h2')
+  ),
+  'heading-3': (
+    'size': size('h3')
+  ),
+  'heading-4': (
+    'size': size('h4')
+  ),
+  'paragraph': (
+    'size': size('text'),
+    'height': 1.5
+  ),
+  'buttons': (
+    'size': size('text'),
+    'height': 1.5,
+    'weight': normal,
+  ),
   'button-primary': (),
   'button-secondary': ()
 );
 
-@function var-font-family($token, $fallback: false) {
-  @if ($can-use-css-variables) {
-    @return var-font($font: $token, $fallback: $fallback);
-  }
-  @else {
-    @return font-family($token);
-  }
-}
-
 /// Set text style.
 /// @param {string} $token - One of keys of $typography map above.
+
 @mixin use-text-style($token: 'body') {
   $type: get-token($typography, $token);
 
-  font-family: var-font-family(get-token($type, 'font'));
-  font-size: get-token($type, 'size');
-  font-weight: get-token($type, 'weight');
-  line-height: get-token($type, 'height');
-  letter-spacing: get-token($type, 'space');
-}
+  @if (get-token($type, 'font') != 'font') {
+    font-family: font-family(get-token($type, 'font'));
+  }
 
-///  text style update- only font size and line height
-/// @param {string} $token - One of keys of $typography map above.
-@mixin update-text-style($token: 'body') {
-  $type: get-token($typography, $token);
+  @if (get-token($type, 'size') != 'size') {
+    font-size: get-token($type, 'size');
+  }
 
-  font-size: get-token($type, 'size');
-  line-height: get-token($type, 'height');
+  @if (get-token($type, 'weight') != 'weight') {
+    font-weight: get-token($type, 'weight');
+  }
+
+  @if (get-token($type, 'height') != 'height') {
+    line-height: get-token($type, 'height');
+  }
+
+  @if (get-token($type, 'spacing') != 'spacing') {
+    letter-spacing: get-token($type, 'spacing') * 1rem / 10;
+  }
 }
