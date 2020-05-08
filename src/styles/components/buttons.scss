@@ -3,8 +3,8 @@
 button,
 .btn,
 input[type="button"] {
-  // @include use-text-style('buttons');
-  // @include padding(0.375rem, 0.75rem, 0.375rem, 0.75rem);
+  @include use-text-style('buttons');
+  @include padding(0.375rem, 0.75rem, 0.375rem, 0.75rem);
 
   -webkit-user-select: none;
   -moz-user-select: none;

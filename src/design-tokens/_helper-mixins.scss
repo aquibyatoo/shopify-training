@@ -28,3 +28,13 @@
 // Usage definition (use `null` do not fill out)
 // @include border(top, 1px, solid, color('primary'));
 
+// Quick Flexbox
+@mixin flex($direction: null, $align-items: null, $justify-content: null, $flex-wrap: null) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+  flex-wrap: $flex-wrap;
+}
+// Usage definition (use `null` do not fill out)
+// @include flex(row, center, space-between, wrap);

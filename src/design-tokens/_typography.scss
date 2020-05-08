@@ -56,7 +56,12 @@ $typography: (
     'weight': normal,
   ),
   'button-primary': (),
-  'button-secondary': ()
+  'button-secondary': (),
+  'navigation': (
+    'size': 12px,
+    'weight': 700,
+    'space': 1px
+  )
 );
 
 /// Set text style.

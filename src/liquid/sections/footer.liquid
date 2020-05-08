@@ -1,0 +1,51 @@
+<footer class="site-footer">
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        {% include 'logo' %}
+      </div>
+      <div class="col">
+        {%- assign footer_linklist = section.settings.footer_linklist -%}
+        {% if linklists[footer_linklist].links.size > 0 %}
+          <nav>
+            <ul>
+              {% for link in linklists[footer_linklist].links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </nav>
+        {% endif %}      
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="copyrights">
+          <small>Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }}. All rights reserved.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_linklist",
+        "label": "First menu",
+        "default": "footer"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": false
+      }
+    ]
+  }
+
+{% endschema %}

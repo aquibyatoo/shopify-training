@@ -1,0 +1,20 @@
+<div class="header-login">
+  <a href="javascript:void(0);" class="login-item search">
+    {% include 'icon-search-header' %}
+    <div class="label">Search</div>
+  </a>
+  <a href="javascript:void(0);" class="login-item user">
+    {% include 'icon-user' %}
+    <div class="label">Login</div>
+  </a>
+  <a href="/cart" class="login-item basket">
+    {% if cart.item_count > 0 %}
+    <div class="count">{{ cart.item_count }}</div>
+    {% endif %}
+    {% include 'icon-shopping-basket' %}
+    <div class="label">Cart</div>
+  </a>
+  <a href="javascript:void(0);" class="login-item mobile-menu">
+    {% include 'icon-hamburger' %}
+  </a>
+</div>

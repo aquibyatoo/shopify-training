@@ -6,6 +6,9 @@
 /* Defined Basic Desing Tokens */
 @import "./src/design-tokens/index";
 
+/* Defined global components */
+@import "./src/styles/components/index";
+
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -80,4 +83,27 @@ table {
     border: 1px solid color('text');
     vertical-align: top;
   }
+}
+
+.container,
+.container-fluid {
+  @include padding(null, 2rem, null, 2rem);
+  @include margin(null, auto, null, auto);
+
+  width: 100%;
+}
+
+.container {
+  @include above('desktop') {
+    max-width: size('page-desktop');
+  }
+}
+
+.row {
+  @include flex(null, center, null, wrap);
+  @include margin(null, -15px, null, -15px);
+}
+
+.col {
+  @include margin(null, 15px, null, 15px);
 }
