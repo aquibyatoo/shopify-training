@@ -78,7 +78,7 @@ table {
 
   th,
   td {
-    @include padding(1rem, 1rem, 1rem, 1rem);
+    @include padding(size('gutter'), size('gutter'), size('gutter'), size('gutter'));
 
     border: 1px solid color('text');
     vertical-align: top;
@@ -87,7 +87,7 @@ table {
 
 .container,
 .container-fluid {
-  @include padding(null, 2rem, null, 2rem);
+  @include padding(null, size('gutter'), null, size('gutter'));
   @include margin(null, auto, null, auto);
 
   width: 100%;
@@ -101,7 +101,7 @@ table {
 
 .row {
   @include flex(null, center, null, wrap);
-  @include margin(null, -15px, null, -15px);
+  @include margin(null, - size('gutter'), null, - size('gutter'));
 
   @include above('desktop') {
     @include flex(null, center, null, nowrap);
@@ -110,7 +110,7 @@ table {
 
 .col,
 .cell {
-  @include margin(null, 15px, null, 15px);
+  @include margin(null, size('gutter'), null, size('gutter'));
 }
 
 .col {

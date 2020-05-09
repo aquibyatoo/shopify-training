@@ -1,0 +1,31 @@
+
+/* Defined Basic Desing Tokens */
+@import "./src/design-tokens/index";
+
+.collection {
+  padding-top: 4rem;
+}
+
+.grid-collection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1px;
+  background-color: white;
+}
+
+.grid-product {
+  display: grid;
+  justify-content: center;
+  padding: size('gutter');
+  line-height: 1;
+
+  .product-title {
+    color: color('text');
+    margin-top: 1rem;
+  }
+
+  .product-price {
+    color: color('text');
+    margin-top: 0.5rem;
+  }
+}
