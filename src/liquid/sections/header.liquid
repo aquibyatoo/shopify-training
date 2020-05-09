@@ -2,12 +2,12 @@
 This is a required section for the Shopify Theme Store.
 It is available in the "Header" section in the theme editor.
 
-Theme Store required settings
+Theme Store required settings:
 - Show announcement
 - Text: message to announce
 - Link: link of the announcement bar
 
-Theme Store optional settings
+Theme Store optional settings:
 - Home page only: only shows on the home page
 {%- endcomment -%}
 <section data-section-id="{{ section.id }}" data-section-type="header">
@@ -15,15 +15,15 @@ Theme Store optional settings
   {% include 'announcement' %}
 
   <header class="site-header" role="banner">
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
-        <div class="col">
+        <div class="cell">
           {% include 'logo' %}
         </div>
-        <div class="col">
+        <div class="cell">
           {% include 'navigation' %}
         </div>
-        <div class="col">
+        <div class="cell">
           {% include 'header-login' %}
         </div>
       </div>

@@ -1,9 +1,52 @@
 .site-footer {
-  @include padding(1rem, 1rem, 1rem, 1rem);
+  @include padding(4rem, null, 2rem, null);
+  @include margin(4rem, null, null, null);
 
-  background-color: color('light-grey');
   border-top: 0.1rem solid color('grey');
+
+  .row {
+    align-items: baseline;
+  }
 }
+
+.no-list {
+  @include flex(null, center, null, nowrap);
+
+  padding: 0;
+  margin: 0;
+}
+
+.footer-nav {
+  @include padding(1rem, null, null, null);
+
+  justify-content: center;
+
+  @include above('tablet') {
+    @include padding(null, null, null, null);
+
+    justify-content: inherit;
+  }
+  a {
+    @include use-text-style('navigation');
+    @include padding(0.5rem, 1rem, 0.5rem, 1rem);
+
+    color: color('text');
+    text-decoration: underline;
+
+    &:hover {
+      color: color('text');
+      text-decoration: underline;
+    }
+  }
+}
+
+.text-holder {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .copyrights {
+  @include padding(4rem, null, null, null);
+
   text-align: center;
 }

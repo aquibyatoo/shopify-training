@@ -1,7 +1,8 @@
 .announcement {
-  @include padding(size('small'), null, size('small'), null);
+  @include padding(0.5rem, null, 0.5rem, null);
 
   color: white;
   background-color: color('red');
   text-align: center;
+  font-size: size(0.9rem);
 }

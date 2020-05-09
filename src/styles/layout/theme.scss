@@ -102,8 +102,22 @@ table {
 .row {
   @include flex(null, center, null, wrap);
   @include margin(null, -15px, null, -15px);
+
+  @include above('desktop') {
+    @include flex(null, center, null, nowrap);
+  }
+}
+
+.col,
+.cell {
+  @include margin(null, 15px, null, 15px);
 }
 
 .col {
-  @include margin(null, 15px, null, 15px);
+  flex: inherit;
+  width: 100%;
+
+  @include above('tablet') {
+    flex: 1;
+  }
 }

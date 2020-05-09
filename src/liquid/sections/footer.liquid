@@ -1,15 +1,26 @@
+{%- comment -%}
+This is a required section for the Shopify Theme Store.
+It is available in the "Footer" section in the theme editor.
+
+Theme Store required settings:
+
+
+Theme Store optional settings:
+
+{%- endcomment -%}
+
 <footer class="site-footer">
 
   <div class="container">
     <div class="row">
       <div class="col">
-        {% include 'logo' %}
+        <div class="text-holder">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>        
       </div>
       <div class="col">
         {%- assign footer_linklist = section.settings.footer_linklist -%}
         {% if linklists[footer_linklist].links.size > 0 %}
           <nav>
-            <ul>
+            <ul class="no-list footer-nav">
               {% for link in linklists[footer_linklist].links %}
                 <li><a href="{{ link.url }}">{{ link.title }}</a></li>
               {% endfor %}
@@ -18,12 +29,8 @@
         {% endif %}      
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <div class="copyrights">
-          <small>Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }}. All rights reserved.</small>
-        </div>
-      </div>
+    <div class="copyrights">
+      <small>Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }}. All rights reserved.</small>
     </div>
   </div>
   
