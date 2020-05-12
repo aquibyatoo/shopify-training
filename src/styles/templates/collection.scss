@@ -2,22 +2,39 @@
 /* Defined Basic Desing Tokens */
 @import "./src/design-tokens/index";
 
-.collection {
+/* Defined Collection Tags */
+@import "./src/styles/components/collection-tags.scss";
+
+/* Defined Collection Pagination */
+@import "./src/styles/components/collection-pagination.scss";
+
+.products-collection {
   padding-top: 4rem;
 }
 
-.grid-collection {
+.grid-products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 1px;
-  background-color: white;
+  display: -ms-grid;
+
+  @include grid-columns(size('gutter'), 1fr 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: row, columns: 2, rows: 6, gap: both));
+
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 6, gap: both));
+  }
 }
 
-.grid-product {
-  display: grid;
-  justify-content: center;
-  padding: size('gutter');
-  line-height: 1;
+.product-thumbnail {
+  @include padding(size('gutter'), null, null, null);
+
+  .product-image {
+    display: block;
+    .image {
+      width: 100%;
+    }
+  }
 
   .product-title {
     color: color('text');
@@ -25,7 +42,10 @@
   }
 
   .product-price {
-    color: color('text');
     margin-top: 0.5rem;
+    a {
+      color: color('text');
+      text-decoration: none;
+    }
   }
 }

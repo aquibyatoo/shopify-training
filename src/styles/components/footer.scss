@@ -9,13 +9,6 @@
   }
 }
 
-.no-list {
-  @include flex(null, center, null, nowrap);
-
-  padding: 0;
-  margin: 0;
-}
-
 .footer-nav {
   @include padding(1rem, null, null, null);
 

@@ -121,3 +121,11 @@ table {
     flex: 1;
   }
 }
+
+.no-list {
+  @include flex(null, center, null, wrap);
+
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
