@@ -1,0 +1,57 @@
+/* Defined Basic Desing Tokens */
+@import "./src/design-tokens/index";
+
+.product-holder {
+  padding-top: 4rem;
+  display: grid;
+  display: -ms-grid;
+
+  @include grid-columns(size('gutter'), 1fr 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: row, columns: 2, rows: 1, gap: both));
+
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 1, gap: both));
+  }
+}
+
+.product-photo {
+  width: 100%;
+}
+
+.product-description {
+  padding-left: 2rem;
+
+  h1 {
+    font-weight: 200;
+  }
+
+  .type,
+  .vendor {
+    @include margin(null, null, 0.5rem, null);
+
+    font-size: 0.9rem;
+    span {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .description {
+    @include margin(1rem, null, 1rem, null);
+  }
+
+  .label {
+    font-weight: 500;
+  }
+
+  .form-control {
+    max-width: 350px;
+  }
+
+  .btn-primary {
+    width: 200px;
+    line-height: 2;
+  }
+}
