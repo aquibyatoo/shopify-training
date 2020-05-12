@@ -10,7 +10,8 @@
     "deploy": "webpack && shopify-themekit deploy",
     "eslint": "eslint 'src/js/**'",
     "stylelint": "stylelint '**/*.scss'",
-    "add-all": "git add ."
+    "add-all": "git add .",
+    "theme": "shopify-themekit"
   },
   "husky": {
     "hooks": {
