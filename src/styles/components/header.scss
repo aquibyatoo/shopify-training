@@ -1,7 +1,11 @@
-
 .site-header {
   @include padding(1rem, null, 1rem, null);
+
+  position: absolute;
+  width: 100%;
+
   .row {
     justify-content: space-between;
+    flex-wrap: nowrap;
   }
 }

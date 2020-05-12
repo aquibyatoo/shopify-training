@@ -14,23 +14,25 @@ Theme Store optional settings:
   <div class="container">
     <div class="row">
       <div class="col">
-        <div class="text-holder">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>        
+        <div class="text-holder">The statements made on this website have not been evaluated by the FDA (U.S. Food & Drug Administration). The products sold on this website are not intended to diagnose, treat, cure, or prevent any disease. The information provided by this website or this company is not a substitute for a face-to-face consultation with your physician, and should not be construed as individual medical advice.</div>        
       </div>
       <div class="col">
-        {%- assign footer_linklist = section.settings.footer_linklist -%}
-        {% if linklists[footer_linklist].links.size > 0 %}
-          <nav>
-            <ul class="no-list footer-nav">
+        <div class="terms">
+          <div class="txt"><strong>Accessibility Tool</strong></div>
+          <div class="txt"><span>Do Not Sell My Personal Information</span></div>
+          {%- assign footer_linklist = section.settings.footer_linklist -%}
+          {% if linklists[footer_linklist].links.size > 0 %}
+            <ul class="footer-nav">
               {% for link in linklists[footer_linklist].links %}
-                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li> /
               {% endfor %}
             </ul>
-          </nav>
-        {% endif %}      
+          {% endif %}
+          <div class="copyrights">
+            <small>Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }}. All rights reserved.</small>
+          </div>
+        </div>   
       </div>
-    </div>
-    <div class="copyrights">
-      <small>Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }}. All rights reserved.</small>
     </div>
   </div>
   

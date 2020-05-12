@@ -95,8 +95,9 @@ table {
 }
 
 .container {
-  @include above('desktop') {
-    max-width: size('page-desktop');
+  @include above('tablet-large') {
+    max-width: 78.375rem;
+    //max-width: size('page-desktop');
   }
 }
 
@@ -104,7 +105,7 @@ table {
   @include flex(null, center, null, wrap);
   @include margin(null, - size('gutter'), null, - size('gutter'));
 
-  @include above('desktop') {
+  @include above('tablet-large') {
     @include flex(null, center, null, nowrap);
   }
 }
@@ -118,7 +119,7 @@ table {
   flex: inherit;
   width: 100%;
 
-  @include above('tablet') {
+  @include above('tablet-large') {
     flex: 1;
   }
 }

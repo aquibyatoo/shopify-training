@@ -1,8 +1,12 @@
 .announcement {
-  @include padding(0.5rem, null, 0.5rem, null);
+  @include padding(0.8rem, null, 0.8rem, null);
 
   color: white;
   background-color: color('red');
   text-align: center;
-  font-size: size(0.9rem);
+  font-size: size(0.7rem);
+
+  @include above('tablet-large') {
+    font-size: size(1rem);
+  }
 }

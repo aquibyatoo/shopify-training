@@ -1,17 +1,46 @@
 .cover {
-  @include padding(4rem, 1rem, 4rem, 1rem);
+  @include padding(8rem, 1rem, 4rem, 1rem);
 
-  background-color: color('light-grey');
+  background-image: url('./hero-fs.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+  background-color: color('sand');
   text-align: center;
 
-  @include above('tablet') {
-    @include padding(8rem, 2rem, 8rem, 2rem);
+  @include above('tablet-large') {
+    @include padding(12rem, 2rem, 8rem, 2rem);
+
+    background-position: center;
+  }
+
+  .cover-text {
+    text-align: center;
+    max-width: 450px;
+    margin: auto;    
+
+    @include above('tablet-large') {
+      max-width: 385px;
+      text-align: left;
+    }
+    h1 {
+      line-height: 2rem;
+      font-size: 2rem;
+
+      @include above('tablet-large') {
+        line-height: 3rem;
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+  .reviews {
+    @include margin(null, null, 1rem, null);
   }
 
   .cover-image {
-    @include below ('tablet') {
+    @include below ('tablet-large') {
       @include margin(2rem, null, null, null);
     }
   }
 }
-
