@@ -45,12 +45,12 @@
 <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
 
   {% section 'header' %}
-  {% if 
+  {% comment %} {% if 
     template != 'product' and
     template != 'cart' 
   %}
     {% section 'hero' %}
-  {% endif %}
+  {% endif %} {% endcomment %}
   <main role="main">
     {{ content_for_layout }}
   </main>

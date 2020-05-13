@@ -1,23 +1,10 @@
 .cover {
-  @include padding(8rem, 1rem, 4rem, 1rem);
-
-  background-image: url('./hero-fs.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: left;
-  background-color: color('sand');
   text-align: center;
-
-  @include above('tablet-large') {
-    @include padding(12rem, 2rem, 8rem, 2rem);
-
-    background-position: center;
-  }
 
   .cover-text {
     text-align: center;
     max-width: 450px;
-    margin: auto;    
+    margin: auto;
 
     @include above('tablet-large') {
       max-width: 385px;
@@ -41,6 +28,93 @@
   .cover-image {
     @include below ('tablet-large') {
       @include margin(2rem, null, null, null);
+    }
+  }
+
+  &.front-page {
+    @include padding(8rem, 1rem, 4rem, 1rem);
+
+    background-image: url('./hero-fs.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    background-color: color('sand');
+
+    @include above('tablet-large') {
+      @include padding(12rem, 2rem, 8rem, 2rem);
+
+      background-position: center;
+    }
+  }
+
+  &.collections {
+    @include padding(4rem, 1rem, 4rem, 1rem);
+
+    border-bottom: 1px solid color('light-grey');
+
+    @include above('tablet-large') {
+      border-bottom: none;
+      padding: 0;
+    }
+
+    .container-fluid {
+      padding: 0;
+    }
+    .cover-image {
+      display: none;
+
+      @include above('tablet-large') {
+        display: block;
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .cover-text {
+      h1 {
+        @include above('tablet-large') {
+          line-height: 3.5rem;
+          font-size: 3.1rem;
+        }
+      }
+    }
+  }
+
+  &.about {
+    @include padding(4rem, 1rem, 4rem, 1rem);
+
+    border-bottom: 1px solid color('light-grey');
+
+    @include above('tablet-large') {
+      border-bottom: none;
+      padding: 0;
+    }
+
+    .container-fluid {
+      padding: 0;
+    }
+    .cover-image {
+      display: none;
+
+      @include above('tablet-large') {
+        display: block;
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .cover-text {      
+      @include above('tablet-large') {
+        margin: 0 0 0 20%;
+      }
+      h1 {
+        @include above('tablet-large') {
+          line-height: 3.2rem;
+          font-size: 3.2rem;
+        }
+      }
     }
   }
 }

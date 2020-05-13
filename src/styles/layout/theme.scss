@@ -124,6 +124,10 @@ table {
   }
 }
 
+.content {
+  @include margin(4rem, null, null, null);
+}
+
 .no-list {
   @include flex(null, center, null, wrap);
 
