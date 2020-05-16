@@ -30,14 +30,12 @@ label {
   // Placeholder
   &::placeholder {
     color: color('grey');
-    // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
     opacity: 1;
   }
 
   &:disabled,
   &[readonly] {
     background-color: color('light-grey');
-    // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
     opacity: 1;
   }
 }
