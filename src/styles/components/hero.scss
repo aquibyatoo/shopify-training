@@ -47,7 +47,8 @@
     }
   }
 
-  &.collections {
+  &.collections,
+  &.about {
     @include padding(4rem, 1rem, 4rem, 1rem);
 
     border-bottom: 1px solid color('light-grey');
@@ -59,6 +60,10 @@
 
     .container-fluid {
       padding: 0;
+      .row,
+      .col {
+        margin: 0;
+      }
     }
     .cover-image {
       display: none;
@@ -76,43 +81,6 @@
         @include above('tablet-large') {
           line-height: 3.5rem;
           font-size: 3.1rem;
-        }
-      }
-    }
-  }
-
-  &.about {
-    @include padding(4rem, 1rem, 4rem, 1rem);
-
-    border-bottom: 1px solid color('light-grey');
-
-    @include above('tablet-large') {
-      border-bottom: none;
-      padding: 0;
-    }
-
-    .container-fluid {
-      padding: 0;
-    }
-    .cover-image {
-      display: none;
-
-      @include above('tablet-large') {
-        display: block;
-        img {
-          width: 100%;
-        }
-      }
-    }
-
-    .cover-text {
-      @include above('tablet-large') {
-        margin: 0 0 0 20%;
-      }
-      h1 {
-        @include above('tablet-large') {
-          line-height: 3.2rem;
-          font-size: 3.2rem;
         }
       }
     }
