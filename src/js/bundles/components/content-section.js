@@ -1,0 +1,1 @@
+import 'Styles/components/content-section.scss';
