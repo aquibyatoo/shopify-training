@@ -1,0 +1,50 @@
+.list-collections {
+  padding-top: 4rem;
+}
+
+.content {
+  display: grid;
+  display: -ms-grid;
+
+  @include grid-columns(size('gutter'), 25% 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: column, columns: 2, rows: 1, gap: both));
+
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 1, gap: both));
+  }
+}
+
+.grid-collections {
+  display: grid;
+  display: -ms-grid;
+
+  @include grid-columns(size('gutter'), 1fr 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: row, columns: 2, rows: 6, gap: both));
+
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 6, gap: both));
+  }
+}
+
+.collection {
+  @include padding(size('gutter'), null, null, null);
+
+  .collection-image {
+    display: block;
+    .image {
+      width: 100%;
+    }
+  }
+
+  .collection-title {
+    margin-top: 1rem;
+    a {
+      color: color('text');
+      text-decoration: none;
+    }
+  }
+}

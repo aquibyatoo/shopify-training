@@ -1,0 +1,29 @@
+
+.collection-tags {
+  @include margin(1rem, null, 1rem, null);
+
+  h2 {
+    font-size: size('text');
+  }
+  .tags {
+    li {
+      @include margin(null, 0.5rem, null, null);
+
+      a {
+        @include padding(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+
+        background-color: color('light-grey');
+        text-decoration: none;
+        color: color('text');
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 500;
+
+        &:hover {
+          background-color: color('grey');
+        }
+      }
+    }
+  }
+}
+

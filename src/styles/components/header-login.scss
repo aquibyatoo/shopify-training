@@ -1,0 +1,54 @@
+.header-login {
+  @include flex(null, center, center, nowrap);
+
+  .login-item {
+    @include use-text-style('navigation');
+    @include padding(0.5rem, 1rem, 0.5rem, 1rem);
+    @include flex(null, center, center, nowrap);
+
+    color: color('text');
+    text-transform: uppercase;
+    text-decoration: none;
+
+    .label {
+      margin-left: 5px;
+
+      @include below('tablet') {
+        display: none;
+      }
+    }
+  }
+
+  .mobile-menu {
+    @include above('tablet') {
+      display: none;
+    }
+  }
+
+  .search {
+    @include below('tablet') {
+      display: none;
+    }
+  }
+
+  .basket {
+    text-decoration: none;
+    display: flex;
+    position: relative;
+
+    .count {
+      @include flex(null, center, center, nowrap);
+
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 14px;
+      height: 14px;
+      text-align: center;
+      border-radius: 50%;
+      background-color: color('light-red');
+      color: white;
+      font-size: 10px;
+    }
+  }
+}

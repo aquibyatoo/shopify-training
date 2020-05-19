@@ -8,13 +8,14 @@ $colors: (
   'grey': #DFE3E8,
   'blue': #006FBB,
   'orange': #F49342,
-  'red': #DE3618,
+  'red': #c8102e,
   'green': #50B83C,
+  'sand': #f7f4ee,
   //Lighter
-  'light-grey': #DFE3E8,
-  'light-blue': #B4E1FA,
-  'light-orange': #FFC58B,
-  'light-red': #DE3618,
+  'light-grey': #f7f7f7,
+  'light-blue': #0689e2,
+  'light-orange': #fda357,
+  'light-red': #ea6868,
   'light-green': #50B83C,
   //Darker
   'dark-grey': #454F5B,
@@ -27,15 +28,15 @@ $colors: (
 // Use color names that define the purpose of the color.
 // Example: primary or highlight or light-background
 $primary-colors: (
-  'primary': '#blue',
-  'primary-100': '#light-blue',
-  'primary-200': '#dark-blue',
+  'primary': '#red',
+  'primary-100': '#light-red',
+  'primary-200': '#dark-red',
 );
 
 $secondary-colors: (
-  'secondary': '#orange',
-  'secondary-100': '#light-orange',
-  'secondary-200': '#dark-orange',
+  'secondary': '#blue',
+  'secondary-100': '#light-blue',
+  'secondary-200': '#dark-blue',
 );
 
 $text-colors: (

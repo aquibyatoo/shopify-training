@@ -1,0 +1,100 @@
+/* Defined Collection Pagination */
+@import "./src/styles/components/collection-pagination.scss";
+
+.products-collection {
+  padding-top: 4rem;
+}
+
+.grid-products {
+  display: grid;
+  display: -ms-grid;
+
+  @include grid-columns(size('gutter'), 1fr 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: row, columns: 2, rows: 6, gap: both));
+
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 6, gap: both));
+  }
+}
+
+.product-thumbnail {
+  // @include padding(size('gutter'), null, null, null);
+  padding: size('gutter');
+  position: relative;
+
+  .tagger {
+    width: 50px;
+    right: -10px;
+    top: -10px;
+    position: absolute;
+
+    @include above('tablet-large') {
+      width: 70px;
+      right: -18px;
+      top: -18px;
+    }
+  }
+
+  .product-image {
+    display: block;
+    .image {
+      width: 100%;
+    }
+  }
+
+  .product-title {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    a {
+      color: color('text');
+      text-decoration: none;
+
+      @include above('tablet-large') {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+      }
+    }
+  }
+
+  .product-price {
+    margin-top: 0.5rem;
+
+    @include above('tablet-large') {
+      text-align: right;
+    }
+    .sale-price,
+    .regular-price {
+      font-weight: 600;
+    }
+    .regular-price {
+      color: color('red');
+      text-decoration: line-through;
+    }
+    a {
+      color: color('text');
+      text-decoration: none;
+    }
+  }
+
+  .thumb-footer {
+    margin-top: 1rem;
+    > .row {
+      align-items: flex-start;
+    }
+  }
+
+  .desc {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    > p {
+      font-size: 0.9rem;
+      color: #b3b3b3;
+    }
+  }
+
+  .btn-holder {
+    text-align: right;
+  }
+}

@@ -3,6 +3,12 @@
 
 
 // Quick Padding & Margins
+// Usage definition (use `null` do not fill out)
+/// @example scss - scss
+///   .test {
+///    @include padding(top, right, bottom, left);
+///    @include margin(5px, 5px, 5px, 5px);
+///   }
 //Padding mixin
 @mixin padding($top, $right, $bottom, $left) {
   padding-top: $top;
@@ -17,14 +23,164 @@
   margin-bottom: $bottom;
   margin-left: $left;
 }
-// Usage definition (use `null` do not fill out)
-// @include padding(top, right, bottom, left);
-// @include margin(5px, 5px, 5px, 5px);
 
 // Quick Border
+// Usage definition (use `null` do not fill out)
+/// @example scss - scss
+///   .test {
+///    @include border(top, 1px, solid, color('primary'));
+///   }
 @mixin border($direction, $width, $style, $color) {
   border-#{$direction}: $width $style $color;
 }
-// Usage definition (use `null` do not fill out)
-// @include border(top, 1px, solid, color('primary'));
 
+// Quick Flexbox
+// Usage definition (use `null` do not fill out)
+/// @example scss - scss
+///   .test {
+///    @include flex(row, center, space-between, wrap);
+///   }
+@mixin flex($direction: null, $align-items: null, $justify-content: null, $flex-wrap: null) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+  flex-wrap: $flex-wrap;
+}
+
+// *** Grid mixin *** //
+/// Add Gap between the boxes
+@function box-gap($boxes, $gap) {
+  $box: ();
+
+  @for $i from 1 through length($boxes) {
+    $box: append($box, nth($boxes, $i), space);
+
+    // Adding Gap Between
+    @if $gap >= 0 {
+      // Not last Loop
+      @if $i != length($boxes) {
+        $box: append($box, $gap, space);
+      }
+    }
+  }
+
+  @return $box;
+}
+/// To build Grid Template Columns with optional gap
+/// @example scss - scss
+///   .test {
+///     @include grid-columns(10px 250px 1fr 50px 100px);
+///   }
+@mixin grid-columns($gap, $columns) {
+  grid-template-columns: $columns;
+
+  @if $gap >= 0 {
+    grid-column-gap: $gap;
+  }
+
+  -ms-grid-columns: box-gap($columns, $gap);
+}
+/// To build Grid Template Rows with optional gap
+/// @example scss - scss
+///   .test {
+///     @include grid-rows(10px 1fr);
+///   }
+@mixin grid-rows($gap, $rows) {
+  grid-template-rows: $rows;
+
+  @if $gap >= 0 {
+    grid-row-gap: $gap;
+  }
+
+  -ms-grid-rows: box-gap($rows, $gap);
+}
+/// Generates IE10/11 grid placement to simulate grid-auto-flow.
+/// @example scss -
+///   .quotes {
+///     @include grid-autoflow(autoflow: column, columns: 3, rows: 6, gap: both);
+///   }
+@mixin grid-autoflow($data) {
+  $autoflow: map-get($data, autoflow);
+  $columns: map-get($data, columns);
+  $rows: map-get($data, rows);
+
+  $columnGap: false;
+  $rowGap: false;
+
+  @if (map-get($data, 'gap') == 'column') {
+    $columnGap: true;
+    $rowGap: false;
+  }
+  @else if (map-get($data, gap) == 'row') {
+    $columnGap: false;
+    $rowGap: true;
+  }
+  @else if (map-get($data, gap) == 'both') {
+    $columnGap: true;
+    $rowGap: true;
+  }
+  @else if (map-get($data, gap) == 'neither') {
+    $columnGap: false;
+    $rowGap: false;
+  }
+  @else {
+    @error The 'gap' argument must be one of 'column', 'row', 'both', or 'neither';
+  }
+
+  @if ($columnGap) {
+    $columns: $columns * 2 - 1;
+  }
+
+  @if ($rowGap) {
+    $rows: $rows * 2 - 1;
+  }
+
+  grid-auto-flow: $autoflow;
+  $column: 1;
+  $row: 1;
+  $counter: 1;
+
+  @if ($autoflow == 'column') {
+    @for $i from 1 through $columns {
+      @for $j from 1 through $rows {
+        // This element can be filled iff we are not in a row gap or a column gap.
+        @if ($i % 2 == 0 and $columnGap) {
+          // This is a column gap. Don't place the next element.
+        }
+        @else if ($j % 2 == 0 and $rowGap) {
+          // This is a row gap. Don't place the next element.
+        }
+        @else {
+          // Place the next element in column $i and row $j.
+          :nth-child(#{$counter}) {
+            -ms-grid-column: $i;
+            -ms-grid-row: $j;
+          }
+          $counter: $counter + 1;
+        }
+      }
+    }
+  }
+  @else if ($autoflow == 'row') {
+    @for $i from 1 through $rows {
+      @for $j from 1 through $columns {
+        // This element can be filled iff we are not in a row gap or a column gap.
+        @if ($i % 2 == 0 and $rowGap) {
+          // This is a row gap. Don't place the next element.
+        }
+        @else if ($j % 2 == 0 and $columnGap) {
+          // This is a column gap. Don't place the next element.
+        }
+        @else {
+          // Place the next element in row $i and column $j.
+          :nth-child(#{$counter}) {
+            -ms-grid-column: $j;
+            -ms-grid-row: $i;
+          }
+          $counter: $counter + 1;
+        }
+      }
+    }
+  }
+}

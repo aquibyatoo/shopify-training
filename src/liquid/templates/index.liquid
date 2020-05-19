@@ -1,3 +1,11 @@
 
 {% assign page = pages.homepage %}
-{{ page.content }}
+
+{% section 'hero' %}
+
+<div class="container">  
+  {{ page.content }}
+</div>
+
+{% include 'left-img-section' %}
+{% include 'right-img-section' %}
