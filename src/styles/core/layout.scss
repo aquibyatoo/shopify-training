@@ -40,6 +40,10 @@
   @include margin(4rem, null, null, null);
 }
 
+.hide {
+  display: none;
+}
+
 .no-list {
   @include flex(null, center, null, wrap);
 

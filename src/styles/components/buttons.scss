@@ -41,3 +41,12 @@ input[type="button"] {
     background-color: color('button-secondary-hover');
   }
 }
+
+.btn-default {
+  color: white;
+  background-color: color('grey');
+
+  &:hover {
+    color: white;
+  }
+}

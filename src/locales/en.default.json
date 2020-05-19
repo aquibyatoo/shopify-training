@@ -171,7 +171,7 @@
     },
     "login": {
       "title": "Login",
-      "email": "Email",
+      "email": "email@example.com",
       "password": "Password",
       "forgot_password": "Forgot your password?",
       "sign_in": "Sign In",
@@ -214,7 +214,7 @@
     },
     "recover_password": {
       "title": "Reset your password",
-      "email": "Email",
+      "email": "email@example.com",
       "submit": "Submit",
       "cancel": "Cancel",
       "subtext": "We will send you an email to reset your password.",
