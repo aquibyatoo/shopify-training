@@ -1,54 +1,56 @@
-.product-holder {
-  padding-top: 4rem;
-  display: grid;
-  display: -ms-grid;
+// @import "./src/design-tokens/index";
 
-  @include grid-columns(size('gutter'), 1fr 1fr);
-  @include grid-rows(size('gutter'), auto);
-  @include grid-autoflow((autoflow: row, columns: 2, rows: 1, gap: both));
+// .product-holder {
+//   padding-top: 4rem;
+//   display: grid;
+//   display: -ms-grid;
 
-  @include below('tablet') {
-    @include grid-columns(size('gutter'), 1fr);
-    @include grid-autoflow((autoflow: row, columns: 1, rows: 1, gap: both));
-  }
-}
+//   @include grid-columns(size('gutter'), 1fr 1fr);
+//   @include grid-rows(size('gutter'), auto);
+//   @include grid-autoflow((autoflow: row, columns: 2, rows: 1, gap: both));
 
-.product-photo {
-  width: 100%;
-}
+//   @include below('tablet') {
+//     @include grid-columns(size('gutter'), 1fr);
+//     @include grid-autoflow((autoflow: row, columns: 1, rows: 1, gap: both));
+//   }
+// }
 
-.product-description {
-  padding-left: 2rem;
+// .product-photo {
+//   width: 100%;
+// }
 
-  h1 {
-    font-weight: 200;
-  }
+// .product-description {
+//   padding-left: 2rem;
 
-  .type,
-  .vendor {
-    @include margin(null, null, 0.5rem, null);
+//   h1 {
+//     font-weight: 200;
+//   }
 
-    font-size: 0.9rem;
-    span {
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-    }
-  }
+//   .type,
+//   .vendor {
+//     @include margin(null, null, 0.5rem, null);
 
-  .description {
-    @include margin(1rem, null, 1rem, null);
-  }
+//     font-size: 0.9rem;
+//     span {
+//       font-weight: 500;
+//       margin-bottom: 0.5rem;
+//     }
+//   }
 
-  .label {
-    font-weight: 500;
-  }
+//   .description {
+//     @include margin(1rem, null, 1rem, null);
+//   }
 
-  .form-control {
-    max-width: 350px;
-  }
+//   .label {
+//     font-weight: 500;
+//   }
 
-  .btn-primary {
-    width: 200px;
-    line-height: 2;
-  }
-}
+//   .form-control {
+//     max-width: 350px;
+//   }
+
+//   .btn-primary {
+//     width: 200px;
+//     line-height: 2;
+//   }
+// }

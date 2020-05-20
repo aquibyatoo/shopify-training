@@ -1,1 +1,0 @@
-import 'Styles/components/collection-tags.scss';

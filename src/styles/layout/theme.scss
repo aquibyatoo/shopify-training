@@ -3,11 +3,8 @@
 /* Normalization */
 @import '~accoutrement/sass/init';
 
-/* Defined Basic Desing Tokens */
+/* Basic Desing Tokens */
 @import "./src/design-tokens/index";
 
-/* Defined global components */
-@import "./src/styles/core/index";
-
-/* Defined global components */
+/* Global Components */
 @import "./src/styles/components/index";
