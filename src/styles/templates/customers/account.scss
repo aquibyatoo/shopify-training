@@ -26,10 +26,10 @@
       position: absolute;
       width: 0;
       height: 0;
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-      border-left: 7px solid color('primary');
-      right: 10px;
+      border-top: 0.4375rem solid transparent;
+      border-bottom: 0.4375rem solid transparent;
+      border-left: 0.4375rem solid color('primary');
+      right: 0.625rem;
     }
   }
   a,
@@ -107,7 +107,7 @@
     border: none;
 
     @include above('tablet') {
-      @include padding(0.6rem, 5px, 0.6rem, 5px);
+      @include padding(0.6rem, 0.3rem, 0.6rem, 0.3rem);
 
       font-size: 1rem;
     }
