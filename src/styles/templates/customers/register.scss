@@ -59,16 +59,16 @@ input[type=password],
 input[type=tel],
 input[type=text] {
   display: block;
-  -moz-appearance: none;
   appearance: none;
+  -moz-appearance: none;
   -webkit-appearance: none;
-  border-radius: 2px;
-  border: 1px solid #d1cfcc;
-  font-size: 14px;
-  line-height: 24px;
+  border-radius: 0.12rem;
+  border: 1px solid color('light-grey');
+  font-size: 0.875rem;
+  line-height: 1.5rem;
   letter-spacing: 0.2px;
-  height: 46px;
-  padding: 0 13px;
+  height: 2.875rem;
+  padding: 0 0.8125rem;
   width: 100%;
   font-weight: 300;
 }

@@ -1,6 +1,8 @@
 .site-header {
   @include padding(1rem, null, 1rem, null);
 
+  background-color: white;
+
   .row {
     justify-content: space-between;
     flex-wrap: nowrap;

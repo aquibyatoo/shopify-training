@@ -3,6 +3,7 @@
   @include margin(4rem, null, null, null);
 
   border-top: 0.1rem solid color('grey');
+  background-color: white;
 
   .row {
     align-items: baseline;

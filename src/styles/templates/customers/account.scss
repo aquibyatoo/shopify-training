@@ -1,0 +1,140 @@
+@import "./src/design-tokens/index";
+
+.account {
+  display: grid;
+  display: -ms-grid;
+
+  @include grid-columns(size('gutter'), 25% 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: column, columns: 2, rows: 1, gap: both));
+
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 1, gap: both));
+  }
+}
+
+.item {
+  margin-bottom: 0.5rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .active {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 7px solid color('primary');
+      right: 10px;
+    }
+  }
+  a,
+  span {
+    display: block;
+    padding: 0.8rem 0.8rem;
+    text-decoration: none;
+  }
+  span {
+    background-color: #eaeaea;
+  }
+}
+
+.sidebar-block {
+  h3 {
+    font-weight: 200;
+  }
+  .email,
+  .phone {
+    margin-bottom: 1rem;
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+.sidebar {
+  .sidebar-block {
+    margin-bottom: 1rem;
+
+    @include above('tablet-large') {
+      margin-bottom: 3rem;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.help {
+  display: none;
+
+  @include above('tablet-large') {
+    display: block;
+  }
+}
+
+.content-holder {
+  h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+}
+
+.account-details {
+  overflow-x: auto;
+
+  @include above('tablet-large') {
+    padding: size('gutter');
+  }
+}
+
+.no-history {
+  text-align: center;
+}
+
+.responsive-table {
+  tr,
+  td,
+  th {
+    @include padding(0.3rem, 0.3rem, 0.3rem, 0.3rem);
+
+    font-size: 0.75rem;
+    border: none;
+
+    @include above('tablet') {
+      @include padding(0.6rem, 5px, 0.6rem, 5px);
+
+      font-size: 1rem;
+    }
+  }
+  thead {
+    tr {
+      border-bottom: 1px solid color('text');
+      th {
+        @include padding(null, null, 0.6rem, null);
+
+        font-weight: 500;
+
+        @include above('tablet') {
+          @include padding(null, null, 1rem, null);
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      @include padding(0.3rem, null, 0.3rem, null);
+
+      text-align: center;
+
+      @include above('tablet') {
+        @include padding(0.6rem, 0.3rem, 0.6rem, 0.3rem);
+      }
+    }
+  }
+}
