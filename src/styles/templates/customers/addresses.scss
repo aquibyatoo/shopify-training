@@ -190,18 +190,20 @@
 
 .group-row {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .input-group {
   margin-bottom: size('gutter');
-  &.inline {
-    @include above('tablet') {
-      display: inline-block;
-      width: 48%;
-      margin-right: 0.5rem;
-    }
-  }
+  // &.inline {
+  //   @include above('tablet') {
+  //     display: inline-block;
+  //     width: 48%;
+  //     margin-right: 0.5rem;
+  //   }
+  // }
   label {
     font-size: 0.9rem;
     line-height: 1.5rem;
@@ -299,15 +301,47 @@ select {
 
 .btn-group {
   margin-top: size('gutter');
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include above('tablet') {
+    flex-direction: row;
+    justify-content: center;
+  }
   .btn {
     width: 200px;
     &:last-child {
       margin-top: 10px;
 
       @include above('tablet') {
-        margin-top: 0;
+        margin: 0 size('gutter');
       }
     }
   }
+}
+
+[data-address='root'] [data-aria-hidden='true'] {
+  display: none;
+}
+
+[data-address-fields] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+[data-line-count='1'] {
+  flex-basis: 100%;
+}
+[data-line-count='2'] {
+  flex-basis: 49%;
+}
+[data-line-count='3'] {
+  flex-basis: 32%;
+}
+
+.hide {
+  display: none;
 }
