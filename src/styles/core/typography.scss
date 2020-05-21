@@ -91,7 +91,7 @@ table {
   td {
     @include padding(size('gutter'), size('gutter'), size('gutter'), size('gutter'));
 
-    border: 1px solid color('text');
+    border: 1px solid color('light-grey');
     vertical-align: top;
   }
 }
