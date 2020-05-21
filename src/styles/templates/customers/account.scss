@@ -30,6 +30,11 @@
       border-bottom: 0.4375rem solid transparent;
       border-left: 0.4375rem solid color('primary');
       right: 0.625rem;
+      transform: rotate(90deg);
+
+      @include above('tablet') {
+        transform: rotate(0deg);
+      }
     }
   }
   a,
@@ -46,6 +51,9 @@
 .sidebar-block {
   h3 {
     font-weight: 200;
+  }
+  .email {
+    font-style: italic;
   }
   .email,
   .phone {
@@ -69,6 +77,13 @@
   }
 }
 
+.address {
+  p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+}
+
 .help {
   display: none;
 
@@ -78,6 +93,10 @@
 }
 
 .content-holder {
+  @include above('tablet-large') {
+    padding-left: 3rem;
+  }
+
   h2 {
     font-size: 1rem;
     font-weight: 500;
@@ -95,45 +114,27 @@
 
 .no-history {
   text-align: center;
+  margin-top: 3rem;
 }
 
 .responsive-table {
-  tr,
-  td,
-  th {
-    @include padding(0.3rem, 0.3rem, 0.3rem, 0.3rem);
+  tr {
+    text-align: center;
+    td,
+    th {
+      border: none;
+      font-size: 0.75rem;
 
-    font-size: 0.75rem;
-    border: none;
-
-    @include above('tablet') {
-      @include padding(0.6rem, 0.3rem, 0.6rem, 0.3rem);
-
-      font-size: 1rem;
+      @include above('tablet') {
+        font-size: 0.9rem;
+      }
     }
   }
   thead {
     tr {
-      border-bottom: 1px solid color('text');
+      border-bottom: 1px solid color('light-grey');
       th {
-        @include padding(null, null, 0.6rem, null);
-
         font-weight: 500;
-
-        @include above('tablet') {
-          @include padding(null, null, 1rem, null);
-        }
-      }
-    }
-  }
-  tbody {
-    tr {
-      @include padding(0.3rem, null, 0.3rem, null);
-
-      text-align: center;
-
-      @include above('tablet') {
-        @include padding(0.6rem, 0.3rem, 0.6rem, 0.3rem);
       }
     }
   }

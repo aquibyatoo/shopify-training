@@ -5,7 +5,6 @@
         <div class="sidebar-block">
           <h3>Hey, {{ customer.first_name }}.</h3>
           <div class="email">{{ customer.email }}</div>
-          <div class="address">{{ customer.default_address | format_address }}</div>
         </div>
         <div class="sidebar-block">
           <div class="menu">
@@ -54,6 +53,17 @@
                 </tbody>
               </table>
             {% else %}
+              <table class="responsive-table">
+                <thead>
+                  <tr>
+                    <th>{{ 'customer.orders.order_number' | t }}</th>
+                    <th>{{ 'customer.orders.date' | t }}</th>
+                    <th>{{ 'customer.orders.payment_status' | t }}</th>
+                    <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                    <th>{{ 'customer.orders.total' | t }}</th>
+                  </tr>
+                </thead>                
+              </table>         
               <div class="no-history">{{ 'customer.orders.none' | t }}</div>
             {% endif %}
             {% if paginate.pages > 1 %}

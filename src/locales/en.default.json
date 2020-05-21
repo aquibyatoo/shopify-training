@@ -161,7 +161,7 @@
       "province": "Province",
       "zip": "Postal/Zip Code",
       "phone": "Phone",
-      "set_default": "Set as default address",
+      "set_default": "Set as default",
       "add": "Add Address",
       "update": "Update Address",
       "cancel": "Cancel",
