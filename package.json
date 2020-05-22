@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@shopify/theme-addresses": "^3.1.0",
+    "@shopify/theme-currency": "^3.1.0",
     "es6-promise": "^4.2.8",
     "js-cookie": "^2.2.1",
     "unfetch": "^4.1.0"
