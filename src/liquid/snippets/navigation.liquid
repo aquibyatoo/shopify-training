@@ -1,4 +1,4 @@
-<nav class="navigation" role="navigation">
+<nav class="navigation" id="navigation" role="navigation">
     <ul class="nav-menu">
         {% for link in linklists[section.settings.menu].links %}
         {% if link.links != blank %}
@@ -16,3 +16,4 @@
         {% endfor %}
     </ul>
 </nav>
+<div class="overlay"></div>
