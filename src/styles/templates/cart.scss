@@ -1,0 +1,84 @@
+@import "./src/design-tokens/index";
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.shopping-cart {
+  max-width: size('page-tablet-large');
+  margin: auto;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+
+  @include above('tablet-large') {
+    flex-direction: row;
+  }
+}
+.product-info {
+  margin-left: 1rem;
+  text-align: left;
+}
+
+.product-title {
+  font-size: 1.2rem;
+  text-decoration: none;
+  display: block;
+}
+
+.vendor {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+}
+
+.product-delete {
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.table {
+  th,
+  td {
+    font-weight: 500;
+    border: none;
+  }
+  .table-row {
+    border-top: 1px solid color('light-grey');
+  }
+  tr {
+    th,
+    td {
+      &:first-child {
+        text-align: left;
+      }
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.total {
+  small {
+    color: color('primary');
+  }
+}
+
+.buttons-group {
+  text-align: right;
+}
+
+.number-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  [type="text"] {
+    text-align: center;
+  }
+}
