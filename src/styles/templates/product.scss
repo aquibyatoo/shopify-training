@@ -1,3 +1,5 @@
+@import "./src/design-tokens/index";
+
 .product-holder {
   padding-top: 4rem;
   display: grid;
@@ -50,5 +52,26 @@
   .btn-primary {
     width: 200px;
     line-height: 2;
+  }
+}
+
+.number-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  border: 1px solid color('light-grey');
+  input[type="text"] {
+    text-align: center;
+    width: 50%;
+    height: 30px;
+  }
+  input[type="button"] {
+    padding: 0;
+    width: 25%;
+    height: 30px;
+  }
+  [type="text"] {
+    text-align: center;
   }
 }

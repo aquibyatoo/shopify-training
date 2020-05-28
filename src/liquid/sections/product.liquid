@@ -37,8 +37,13 @@
           <div class="price">{{ current_variant.price | money }}</div>
         </div>        
         <div class="form-group">
-          <label for="Quantity" class="label">Quantity:</label>
-          <input type="number" id="Quantity" class="form-control" name="Quantity" value="1" min="1">
+          <div id="counter" class="number-counter">
+            <input type="button" value="-" id="mins">
+            <input type="text" name="updates[]" value="1" min="0" aria-label="{{ 'cart.general.item_quantity' | t }}"  id="Quantity">              
+            <input type="button" value="+" id="plus">
+          </div>        
+          {% comment %} <label for="Quantity" class="label">Quantity:</label>
+          <input type="number" id="Quantity" class="form-control" name="Quantity" value="1" min="1"> {% endcomment %}
         </div>
         <button type="submit" class="btn btn-primary btn-lg" name="add" id="AddToCart">Add to cart</button>
       </form>

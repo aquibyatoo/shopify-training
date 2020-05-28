@@ -50,12 +50,10 @@
             </td>
             <td data-label="{{ 'cart.label.quantity' | t }}">
             <div id="counter" class="number-counter">
-              <input type="button" value="-" id="mins">
-              <input type="text" name="updates[]" value="{{ item.quantity }}" min="0"
-                aria-label="{{ 'cart.general.item_quantity' | t }}" size="25" value="1" id="count">              
-              <input type="button" value="+" id="plus">
-            </div>        
-              {% comment %} <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" aria-label="{{ 'cart.general.item_quantity' | t }}"> {% endcomment %}
+              <input type="button" value="-" class="counter-minus">
+              <input type="text" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="{{ 'cart.general.item_quantity' | t }}" pattern="[0-9]*" data-variant-id="{{ item.variant_id }}" class="counter-input">
+              <input type="button" value="+" class="counter-plus">
+            </div>              
             </td>            
             <td data-label="{{ 'cart.label.price' | t }}">
               {% if item.original_line_price != item.line_price %}
@@ -67,24 +65,17 @@
               {{ item.price | money }}
               {% endif %}
             </td>
-            {% comment %} <td data-label="{{ 'cart.label.total' | t }}">
-              {{ item.line_price | money }}
-            </td> {% endcomment %}
           </tr>
           {% endfor %}
-          <tr class="table-row">
-            <td><p>{{ 'cart.general.shipping_at_checkout' | t }}</p></td>
-            <td></td>
-            <td>
-              <div class="total">
-                <small>{{ 'cart.general.subtotal' | t }}:</small>
-                <span>{{ cart.total_price | money }}</span>
-              </div>            
-            </td>
-          </tr>
           </tbody>
         </table>
-
+        <div class="cart-footer">
+          <div class="ship-text">{{ 'cart.general.shipping_at_checkout' | t }}</div>
+          <div class="total">
+            <small>{{ 'cart.general.subtotal' | t }}:</small>
+            <span>{{ cart.total_price | money }}</span>
+          </div>  
+        </div>
         {% if settings.cart_notes_enable %}
         <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
         <textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
