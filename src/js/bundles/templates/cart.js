@@ -3,32 +3,37 @@ import 'Styles/templates/cart.scss';
 (function() {
   'use strict';
 
-  let count = 1;
   const dom = {};
 
   const cacheDom = () => {
-    dom.countEl = document.getElementById('count');
-    dom.countMinus = document.getElementById('mins');
-    dom.countPlus = document.getElementById('plus');
-  }
+    dom.cartQtyButton = document.querySelectorAll(`[data-item-quantity-change]`);
+    dom.cartQty = document.querySelectorAll(`[data-item-quantity]`);
+    dom.cartForm = document.querySelectorAll(`[data-cart-form]`);
+  };
 
-  const plus = () => {
-    count++
-    dom.countEl.value = count
-    console.log(count);
-  }
-
-  const minus = () => {
-    if (count > 1) {
-      count--
-      dom.countEl.value = count
+  const validateQty = (qty) => {
+    if((parseFloat(qty) == parseInt(qty)) && !isNaN(qty)) {
+      // We have a valid number!
+    } else {
+      qty = 1;
     }
-    console.log(count);
-  }
+    return qty;
+  };
 
   const bindUIActions = () => {
-    dom.countMinus.addEventListener('click', minus);
-    dom.countPlus.addEventListener('click', plus);
+    dom.cartQtyButton.forEach((element) => {
+      element.addEventListener('click', function() {
+        let qtySelector = this.parentNode.querySelector(`[data-item-quantity]`);
+        let qty = validateQty(parseInt(qtySelector.value.replace(/\D/g, '')));
+        if (this.hasAttribute('data-item-quantity-plus')) {
+          qty += 1;
+        } else {
+          qty -= 1;
+          if (qty <= 0) qty = 0;
+        }
+        qtySelector.value = qty;
+      })
+    })
   }
 
   const init = () => {

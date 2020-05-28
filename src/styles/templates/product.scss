@@ -55,13 +55,16 @@
   }
 }
 
+// Plus-Minus Component
 .number-counter {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100px;
   border: 1px solid color('light-grey');
-  input[type="text"] {
+  input[type="number"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
     text-align: center;
     width: 50%;
     height: 30px;
@@ -71,7 +74,9 @@
     width: 25%;
     height: 30px;
   }
-  [type="text"] {
-    text-align: center;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
