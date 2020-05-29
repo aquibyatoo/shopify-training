@@ -1,7 +1,5 @@
-/* Defined Buttons */
-
-button,
 .btn,
+button,
 input[type="button"] {
   @include use-text-style('buttons');
   @include padding(0.75rem, 1.2rem, 0.75rem, 1.2rem);

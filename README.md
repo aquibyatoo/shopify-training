@@ -75,14 +75,12 @@ When running `npm start`, Webpack will use a plugin that runs `shopify-themekit 
 #### Basic structure
 ```
 ├── assets
-│   ├── favicon
-│   ├── fonts
-│   ├── images
-│   └── svg
+│   ├── favicon, fonts, images, svg
 ├── config
-│   └── custom Theme Settings
+│   └── theme settings
 ├── design-tokens
-│   └── _animation.scss
+│   ├── _animation.scss
+│   ├── _helper-mixins.scss
 │   ├── _colors.scss
 │   ├── _layouts.scss
 │   ├── _sizes.scss
@@ -90,20 +88,24 @@ When running `npm start`, Webpack will use a plugin that runs `shopify-themekit 
 │   └── index.scss
 ├── js / bundles
 │   ├── components
-│   │   ├── announcement.js
-│   │   ├── buttons.js
-│   │   ├── hero.js
-│   │   └── index.js
+│   │   └── navigation.js
 │   ├── layout
 │   │   ├── theme.js
 │   │   └── optional alternate layouts
 │   └── templates
+│       ├── customers
+│       │   ├── account.js
+│       │   ├── activate_account.js
+│       │   ├── addresses.js
+│       │   ├── login.js
+│       │   ├── order.js
+│       │   ├── register.js
+│       │   └── reset_password.js
 │       ├── 404.js
 │       ├── article.js
 │       ├── blog.js
 │       ├── cart.js
 │       ├── collection.js
-│       ├── collection.list.js
 │       ├── gift_card.js
 │       ├── index.js
 │       ├── list-collections.js
@@ -116,12 +118,9 @@ When running `npm start`, Webpack will use a plugin that runs `shopify-themekit 
 │   │   ├── theme.liquid
 │   │   └── optional alternate layouts
 │   ├── sections
-│   │   ├── sample.liquid
-│   │   ├── style-bundle.liquid
-│   │   └── optional alternate sections
+│   │   └── theme sections
 │   ├── snippets
-│   │   ├── script-bundle.liquid.liquid
-│   │   └── optional alternate sections
+│   │   └── theme snippets
 │   └── templates
 │       ├── customers
 │       │   ├── account.liquid
@@ -136,26 +135,34 @@ When running `npm start`, Webpack will use a plugin that runs `shopify-themekit 
 │       ├── blog.liquid
 │       ├── cart.liquid
 │       ├── collection.liquid
-│       ├── collection.list.liquid
 │       ├── gift_card.liquid
 │       ├── index.liquid
 │       ├── list-collections.liquid
 │       ├── page.contact.liquid
 │       ├── page.liquid
+│       ├── password.liquid
 │       ├── product.liquid
 │       └── search.liquid
 ├── locales
-│   └── en.default.json
+│   └── theme locales
 ├── styles
 │   ├── components
-│   │   ├── announcement.scss
-│   │   ├── buttons.scss
-│   │   ├── hero.scss
-│   │   └── index.scss
+│   │   ├── global
+│   │   │    └── global files
+│   │   └── shared
+│   │   │    └── shared files
 │   ├── layout
 │   │   ├── theme.scss
 │   │   └── optional alternate layouts
 │   └── templates
+│       ├── customers
+│       │   ├── account.scss
+│       │   ├── activate_account.scss
+│       │   ├── addresses.scss
+│       │   ├── login.scss
+│       │   ├── order.scss
+│       │   ├── register.scss
+│       │   └── reset_password.scss
 │       ├── 404.scss
 │       ├── article.scss
 │       ├── blog.scss

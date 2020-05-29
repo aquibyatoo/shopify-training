@@ -1,5 +1,7 @@
-/* Defined Collection Pagination */
-@import "./src/styles/components/collection-pagination.scss";
+@import "./src/design-tokens/index";
+
+/* Collection Pagination */
+@import "./src/styles/components/shared/collection-pagination";
 
 .products-collection {
   padding-top: 4rem;
