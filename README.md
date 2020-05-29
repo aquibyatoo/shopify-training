@@ -62,6 +62,13 @@ When running `npm start`, Webpack will use a plugin that runs `shopify-themekit 
 - The layout and template entry files in `src/js/bundles/` are necessary for Webpack to generate the CSS and JavaScript assets for each layout and template. Additional entry files will be required when creating new liquid templates or alternate templates, ie. `page.about.js`.
 - The `style-bundle.liquid` and `script-bundle.liquid` snippets output dynamic asset URLs based on current layout and template. These have been added to sample `theme.liquid`. The `layout` variable is required.
 
+#### Shopify Plus Stores
+If your store is on Shopify Plus, you'll need to do the following:
+- Create `checkout.scss` and add to `src/styles/layout/`.
+- Create `checkout.js` and add to `src/js/bundles/layout/`.
+- Add `import "Styles/layout/checkout.scss";` to `checkout.js`.
+- Render these snippets in `checkout.liquid` by changing the snippet's layout variable to `checkout`. ie. `{% render 'style-bundle', layout: 'checkout' %}` and `{% render 'script-bundle', layout: 'checkout' %}`.
+
 ## Notes
 - Subdirectories are allowed in `assets/`, `js/`, `styles/`, `snippets/`.
 - A `Styles` module alias for the styles directory is ready to use. ie. `import "Styles/layout/theme.scss"`.
@@ -72,18 +79,21 @@ When running `npm start`, Webpack will use a plugin that runs `shopify-themekit 
 - If you update or switch node versions using `nvm`, you may need to run `npm rebuild node-sass` to refresh node-sass for your current environment.
 - When merging 2 git feature branches, you only need to resolve the conlficts inside `src/`. Any conflicts inside `dist/` can be resolved with `npm run build`. Always run `npm run build` after resolving merge conflicts.
 
+## Under Construction
+A few issues with this workflow that I'm working on a solution for:
+- If a Webpack entry file is deleted, how to also remove the generated output files from `dist/assets/`. The `clean-webpack-plugin` removes the entire dist folder which git tracks as new changes to every file in the directory, so that is not an option.
+- Currently, if the same vendor module is imported in a layout and template entry file, that code will be included twice. How to split out vendor file imports but also make them available in the necessary modules.
+
 #### Basic structure
 ```
 ├── assets
-│   ├── favicon
-│   ├── fonts
-│   ├── images
-│   └── svg
+│   ├── favicon, fonts, images, svg
 ├── config
-│   └── custom Theme Settings
+│   └── Custom Theme Settings
 ├── design-tokens
 │   └── _animation.scss
 │   ├── _colors.scss
+│   ├── _layouts.scss
 │   ├── _layouts.scss
 │   ├── _sizes.scss
 │   ├── _typography.scss
