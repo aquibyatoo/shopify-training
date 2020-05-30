@@ -6,10 +6,6 @@
 
 <section class="products-collection">
   <div class="container">
-    {% comment %} <h1>{{ collection.title }}</h1> {% endcomment %}
-
-    {% comment %} {% include 'collection-tags' %} {% endcomment %}
-
     {% paginate collection.products by 12 %}
       <div class="grid-products">
         {% for product in collection.products %}
