@@ -1,0 +1,357 @@
+/*
+ * Import style components for the current template.
+ *
+ * Write your own styles after imports.
+ *
+ * Design tokens are required and encapsulated for each template.
+ * Import it from the design-tokens folder.
+ */
+
+// Design tokens
+@import "./src/design-tokens/index";
+
+.customer-account {
+  display: grid;
+  display: -ms-grid;
+
+  @include grid-columns(size('gutter'), 25% 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: column, columns: 2, rows: 1, gap: both));
+
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 1, gap: both));
+  }
+}
+
+.item {
+  margin-bottom: 0.5rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .active {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 0.4375rem solid transparent;
+      border-bottom: 0.4375rem solid transparent;
+      border-left: 0.4375rem solid color('primary');
+      right: 0.625rem;
+      transform: rotate(90deg);
+
+      @include above('tablet') {
+        transform: rotate(0deg);
+      }
+    }
+  }
+  a,
+  span {
+    display: block;
+    padding: 0.8rem 0.8rem;
+    text-decoration: none;
+  }
+  span {
+    background-color: #eaeaea;
+  }
+}
+
+.sidebar-block {
+  h3 {
+    font-weight: 200;
+  }
+  .email {
+    font-style: italic;
+  }
+  .email,
+  .phone {
+    margin-bottom: 1rem;
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+.sidebar {
+  .sidebar-block {
+    margin-bottom: 1rem;
+
+    @include above('tablet-large') {
+      margin-bottom: 3rem;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.address {
+  p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+}
+
+.help {
+  display: none;
+
+  @include above('tablet-large') {
+    display: block;
+  }
+}
+
+.content-holder {
+  @include above('tablet-large') {
+    padding-left: 3rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+}
+
+.panel {
+  @include padding(1.5rem, 1.5rem, 1.5rem, 1.5rem);
+
+  background-color: #f9f9f9;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+}
+
+.address-panel {
+  .name {
+    margin-bottom: size('gutter');
+    h3 {
+      display: inline-block;
+      font-size: 1.3rem;
+      line-height: 2rem;
+      margin-bottom: 0;
+    }
+    span {
+      font-size: 0.7rem;
+      font-style: italic;
+      line-height: 1;
+      display: block;
+
+      @include above('tablet') {
+        display: inline-block;
+        margin-left: 0.3rem;
+      }
+    }
+    .more-options {
+      position: relative;
+      float: right;
+      svg {
+        width: 3.4rem;
+        height: 1.6rem;
+        position: relative;
+        top: -0.3rem;
+        z-index: 1;
+        padding: 0.6rem 0.9rem;
+        cursor: pointer;
+      }
+      .actions {
+        position: absolute;
+        width: 100px;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.19);
+        background-color: #fff;
+        padding: 1.5rem 0.6rem 0.6rem;
+        right: 0;
+        top: -0.6rem;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.2s ease-in;
+        .btn-action {
+          padding: 4px 2px;
+          font-weight: 300;
+          text-transform: inherit;
+          display: block;
+          width: 100%;
+          text-align: left;
+          border-radius: 0;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          &:hover {
+            color: color('primary');
+            text-decoration: underline;
+          }
+        }
+      }
+      &:hover {
+        svg {
+          g {
+            fill: color('primary');
+          }
+        }
+        .actions {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.group-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input-group {
+  margin-bottom: size('gutter');
+  // &.inline {
+  //   @include above('tablet') {
+  //     display: inline-block;
+  //     width: 48%;
+  //     margin-right: 0.5rem;
+  //   }
+  // }
+  label {
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    color: color('text');
+    letter-spacing: 0.5px;
+    text-transform: none;
+    font-weight: 500;
+  }
+}
+
+input[type=email],
+input[type=password],
+input[type=tel],
+input[type=text] {
+  display: block;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-color: white;
+  border-radius: 0.12rem;
+  border: 1px solid color('light-grey');
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.2px;
+  height: 2.875rem;
+  padding: 0 0.8125rem;
+  width: 100%;
+  font-weight: 300;
+}
+
+input[type=email]:focus,
+input[type=password]:focus,
+input[type=tel]:focus,
+input[type=text]:focus {
+  outline: none;
+  border-color: color('secondary');
+}
+
+select {
+  display: block;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 0 0.8125rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: color('text');
+  background-image: url('./down-arrow.png');
+  background-position: calc(100% - 12px) 50%;
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-color: white;
+  background-clip: padding-box;
+  border: 1px solid color('light-grey');
+  border-radius: 0.12rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  letter-spacing: 0.2px;
+  height: 2.875rem;
+  font-weight: 300;
+
+  // Unstyle the caret on `<select>`s in IE10+.
+  &::-ms-expand {
+    background-color: transparent;
+    border: 0;
+  }
+
+  // Placeholder
+  &::placeholder {
+    color: color('grey');
+    opacity: 1;
+  }
+
+  &:disabled,
+  &[readonly] {
+    background-color: color('light-grey');
+    opacity: 1;
+  }
+}
+
+.btn-add {
+  width: 100%;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+
+.setter-default {
+  label {
+    line-height: inherit;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+}
+
+.btn-group {
+  margin-top: size('gutter');
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include above('tablet') {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .btn {
+    width: 200px;
+    &:last-child {
+      margin-top: 10px;
+
+      @include above('tablet') {
+        margin: 0 size('gutter');
+      }
+    }
+  }
+}
+
+[data-address='root'] [data-aria-hidden='true'] {
+  display: none;
+}
+
+[data-address-fields] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+[data-line-count='1'] {
+  flex-basis: 100%;
+}
+[data-line-count='2'] {
+  flex-basis: 49%;
+}
+[data-line-count='3'] {
+  flex-basis: 32%;
+}
+
+.hide {
+  display: none;
+}

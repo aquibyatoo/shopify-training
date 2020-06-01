@@ -1,16 +1,25 @@
-@import "./src/design-tokens/index";
-
 .header-login {
   @include flex(null, center, center, nowrap);
 
   .login-item {
     @include use-text-style('navigation');
-    @include padding(0.5rem, 1rem, 0.5rem, 1rem);
+    @include padding(0.5rem, 0.5rem, 0.5rem, 0.5rem);
     @include flex(null, center, center, nowrap);
 
     color: color('text');
     text-transform: uppercase;
     text-decoration: none;
+    position: relative;
+
+    @include above('mobile-large') {
+      @include padding(0.5rem, 1rem, 0.5rem, 1rem);
+    }
+
+    a {
+      color: color('text');
+      text-transform: uppercase;
+      text-decoration: none;
+    }
 
     .label {
       margin-left: 5px;

@@ -1,0 +1,151 @@
+/*
+ * Import style components for the current template.
+ *
+ * Write your own styles after imports.
+ *
+ * Design tokens are required and encapsulated for each template.
+ * Import it from the design-tokens folder.
+ */
+
+// Design tokens
+@import "./src/design-tokens/index";
+
+.customer-account {
+  display: grid;
+  display: -ms-grid;
+
+  @include grid-columns(size('gutter'), 25% 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: column, columns: 2, rows: 1, gap: both));
+
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 1, gap: both));
+  }
+}
+
+.item {
+  margin-bottom: 0.5rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .active {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 0.4375rem solid transparent;
+      border-bottom: 0.4375rem solid transparent;
+      border-left: 0.4375rem solid color('primary');
+      right: 0.625rem;
+      transform: rotate(90deg);
+
+      @include above('tablet') {
+        transform: rotate(0deg);
+      }
+    }
+  }
+  a,
+  span {
+    display: block;
+    padding: 0.8rem 0.8rem;
+    text-decoration: none;
+  }
+  span {
+    background-color: #eaeaea;
+  }
+}
+
+.sidebar-block {
+  h3 {
+    font-weight: 200;
+  }
+  .email {
+    font-style: italic;
+  }
+  .email,
+  .phone {
+    margin-bottom: 1rem;
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+.sidebar {
+  .sidebar-block {
+    margin-bottom: 1rem;
+
+    @include above('tablet-large') {
+      margin-bottom: 3rem;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.address {
+  p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+}
+
+.help {
+  display: none;
+
+  @include above('tablet-large') {
+    display: block;
+  }
+}
+
+.content-holder {
+  @include above('tablet-large') {
+    padding-left: 3rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+}
+
+.account-details {
+  overflow-x: auto;
+
+  @include above('tablet-large') {
+    padding: size('gutter');
+  }
+}
+
+.no-history {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.responsive-table {
+  tr {
+    text-align: center;
+    td,
+    th {
+      border: none;
+      font-size: 0.75rem;
+
+      @include above('tablet') {
+        font-size: 0.9rem;
+      }
+    }
+  }
+  thead {
+    tr {
+      border-bottom: 1px solid color('light-grey');
+      th {
+        font-weight: 500;
+      }
+    }
+  }
+}

@@ -1,1 +1,15 @@
-// @import "./src/design-tokens/index";
+/*
+ * Import style components for the current template.
+ *
+ * Write your own styles after imports.
+ *
+ * Design tokens are required and encapsulated for each template.
+ * Import it from the design-tokens folder.
+ */
+
+// Design tokens
+@import "./src/design-tokens/index";
+
+// Shared components
+@import './src/styles/components/shared/hero';
+@import './src/styles/components/shared/content-section';

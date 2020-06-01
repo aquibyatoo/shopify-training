@@ -6,10 +6,6 @@
 
 <section class="products-collection">
   <div class="container">
-    {% comment %} <h1>{{ collection.title }}</h1> {% endcomment %}
-
-    {% comment %} {% include 'collection-tags' %} {% endcomment %}
-
     {% paginate collection.products by 12 %}
       <div class="grid-products">
         {% for product in collection.products %}
@@ -17,8 +13,7 @@
             <div class="tagger"><img src="{{ 'popular.svg' | asset_url }}" alt="popular"></div>
             {% if product.featured_image != blank %}
             <a href="{{ product.url | within: collection }}" class="product-image">
-              <img src="{{ product.featured_image.src | img_url: '600x' }}" class="image" alt="{{ product.featured_image.alt | escape }}">
-              {% comment %} {% include 'responsive-image' with image: product.featured_image, max_width: 600, max_height: 600 %} {% endcomment %}
+              {% include 'responsive-image' with image: product.featured_image, max_width: 767, max_height: 767 %}
             </a>
             {% endif %}
             <div class="row">

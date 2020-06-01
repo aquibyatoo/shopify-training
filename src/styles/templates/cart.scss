@@ -1,1 +1,156 @@
-// @import "./src/design-tokens/index";
+/*
+ * Import style components for the current template.
+ *
+ * Write your own styles after imports.
+ *
+ * Design tokens are required and encapsulated for each template.
+ * Import it from the design-tokens folder.
+ */
+
+// Design tokens
+@import "./src/design-tokens/index";
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.shopping-cart {
+  max-width: size('page-tablet-large');
+  margin: auto;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+
+  @include above('tablet') {
+    flex-direction: row;
+  }
+}
+
+.product-image {
+  max-width: 25%;
+  min-width: 130px;
+
+  @include above('tablet') {
+    max-width: inherit;
+    min-width: 200px;
+  }
+}
+
+.product-info {
+  margin-top: 1rem;
+  text-align: left;
+
+  @include above('tablet') {
+    margin-left: 1rem;
+    margin-top: 0;
+  }
+}
+
+.product-title {
+  font-size: 1rem;
+  text-decoration: none;
+  display: block;
+}
+
+.vendor {
+  font-size: 0.6rem;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+}
+
+.product-delete {
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.table {
+  th,
+  td {
+    border: none;
+    padding: 10px 0;
+    text-align: left;
+
+    @include above('tablet-large') {
+      padding: size('gutter');
+    }
+  }
+  thead {
+    th {
+      &:last-child {
+        text-align: right;
+      }
+      &:not(:first-child) {
+        @include below('tablet-large') {
+          display: none;
+        }
+      }
+    }
+  }
+  .table-row {
+    border-top: 1px solid color('light-grey');
+
+    @include below('tablet-large') {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  [data-label="Price"] {
+    min-width: 100px;
+    text-align: right;
+  }
+}
+
+.buttons-group {
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid color('light-grey');
+
+  .ship-text {
+    font-size: 0.8rem;
+    flex: 1 1 0;
+  }
+
+  .total {
+    text-align: right;
+    flex: 1 1 0;
+  }
+}
+
+// Plus-Minus Component
+.number-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  border: 1px solid color('light-grey');
+  input[type="number"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    text-align: center;
+    width: 50%;
+    height: 30px;
+  }
+  input[type="button"] {
+    padding: 0;
+    width: 25%;
+    height: 30px;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

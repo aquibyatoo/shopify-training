@@ -1,52 +1,62 @@
-// @import "./src/design-tokens/index";
+/*
+ * Import style components for the current template.
+ *
+ * Write your own styles after imports.
+ *
+ * Design tokens are required and encapsulated for each template.
+ * Import it from the design-tokens folder.
+ */
 
-// .list-collections {
-//   padding-top: 4rem;
-// }
+// Design tokens
+@import "./src/design-tokens/index";
 
-// .content {
-//   display: grid;
-//   display: -ms-grid;
+.list-collections {
+  padding-top: 4rem;
+}
 
-//   @include grid-columns(size('gutter'), 25% 1fr);
-//   @include grid-rows(size('gutter'), auto);
-//   @include grid-autoflow((autoflow: column, columns: 2, rows: 1, gap: both));
+.content {
+  display: grid;
+  display: -ms-grid;
 
-//   @include below('tablet') {
-//     @include grid-columns(size('gutter'), 1fr);
-//     @include grid-autoflow((autoflow: row, columns: 1, rows: 1, gap: both));
-//   }
-// }
+  @include grid-columns(size('gutter'), 25% 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: column, columns: 2, rows: 1, gap: both));
 
-// .grid-collections {
-//   display: grid;
-//   display: -ms-grid;
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 1, gap: both));
+  }
+}
 
-//   @include grid-columns(size('gutter'), 1fr 1fr);
-//   @include grid-rows(size('gutter'), auto);
-//   @include grid-autoflow((autoflow: row, columns: 2, rows: 6, gap: both));
+.grid-collections {
+  display: grid;
+  display: -ms-grid;
 
-//   @include below('tablet') {
-//     @include grid-columns(size('gutter'), 1fr);
-//     @include grid-autoflow((autoflow: row, columns: 1, rows: 6, gap: both));
-//   }
-// }
+  @include grid-columns(size('gutter'), 1fr 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: row, columns: 2, rows: 6, gap: both));
 
-// .collection {
-//   @include padding(size('gutter'), null, null, null);
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 6, gap: both));
+  }
+}
 
-//   .collection-image {
-//     display: block;
-//     .image {
-//       width: 100%;
-//     }
-//   }
+.collection {
+  @include padding(size('gutter'), null, null, null);
 
-//   .collection-title {
-//     margin-top: 1rem;
-//     a {
-//       color: color('text');
-//       text-decoration: none;
-//     }
-//   }
-// }
+  .collection-image {
+    display: block;
+    .image {
+      width: 100%;
+    }
+  }
+
+  .collection-title {
+    margin-top: 1rem;
+    a {
+      color: color('text');
+      text-decoration: none;
+    }
+  }
+}

@@ -1,101 +1,113 @@
-// /* Defined Collection Pagination */
-// @import "./src/design-tokens/index";
-// // @import "./src/styles/components/collection-pagination.scss";
+/*
+ * Import style components for the current template.
+ *
+ * Write your own styles after imports.
+ *
+ * Design tokens are required and encapsulated for each template.
+ * Import it from the design-tokens folder.
+ */
 
-// .products-collection {
-//   padding-top: 4rem;
-// }
+// Design tokens
+@import "./src/design-tokens/index";
 
-// .grid-products {
-//   display: grid;
-//   display: -ms-grid;
+// Shared components
+@import './src/styles/components/shared/hero';
+@import "./src/styles/components/shared/collection-pagination";
 
-//   @include grid-columns(size('gutter'), 1fr 1fr);
-//   @include grid-rows(size('gutter'), auto);
-//   @include grid-autoflow((autoflow: row, columns: 2, rows: 6, gap: both));
+.products-collection {
+  padding-top: 4rem;
+}
 
-//   @include below('tablet') {
-//     @include grid-columns(size('gutter'), 1fr);
-//     @include grid-autoflow((autoflow: row, columns: 1, rows: 6, gap: both));
-//   }
-// }
+.grid-products {
+  display: grid;
+  display: -ms-grid;
 
-// .product-thumbnail {
-//   // @include padding(size('gutter'), null, null, null);
-//   padding: size('gutter');
-//   position: relative;
+  @include grid-columns(size('gutter'), 1fr 1fr);
+  @include grid-rows(size('gutter'), auto);
+  @include grid-autoflow((autoflow: row, columns: 2, rows: 6, gap: both));
 
-//   .tagger {
-//     width: 50px;
-//     right: -10px;
-//     top: -10px;
-//     position: absolute;
+  @include below('tablet') {
+    @include grid-columns(size('gutter'), 1fr);
+    @include grid-autoflow((autoflow: row, columns: 1, rows: 6, gap: both));
+  }
+}
 
-//     @include above('tablet-large') {
-//       width: 70px;
-//       right: -18px;
-//       top: -18px;
-//     }
-//   }
+.product-thumbnail {
+  // @include padding(size('gutter'), null, null, null);
+  padding: size('gutter');
+  position: relative;
 
-//   .product-image {
-//     display: block;
-//     .image {
-//       width: 100%;
-//     }
-//   }
+  .tagger {
+    width: 50px;
+    right: -10px;
+    top: -10px;
+    position: absolute;
 
-//   .product-title {
-//     margin-top: 1rem;
-//     font-size: 1.1rem;
-//     a {
-//       color: color('text');
-//       text-decoration: none;
+    @include above('tablet-large') {
+      width: 70px;
+      right: -18px;
+      top: -18px;
+    }
+  }
 
-//       @include above('tablet-large') {
-//         font-size: 1.2rem;
-//         line-height: 1.5rem;
-//       }
-//     }
-//   }
+  .product-image {
+    display: block;
+    .image {
+      width: 100%;
+    }
+  }
 
-//   .product-price {
-//     margin-top: 0.5rem;
+  .product-title {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    a {
+      color: color('text');
+      text-decoration: none;
 
-//     @include above('tablet-large') {
-//       text-align: right;
-//     }
-//     .sale-price,
-//     .regular-price {
-//       font-weight: 600;
-//     }
-//     .regular-price {
-//       color: color('red');
-//       text-decoration: line-through;
-//     }
-//     a {
-//       color: color('text');
-//       text-decoration: none;
-//     }
-//   }
+      @include above('tablet-large') {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+      }
+    }
+  }
 
-//   .thumb-footer {
-//     margin-top: 1rem;
-//     > .row {
-//       align-items: flex-start;
-//     }
-//   }
+  .product-price {
+    margin-top: 0.5rem;
 
-//   .desc {
-//     font-size: 0.9rem;
-//     color: #b3b3b3;
-//     > p {
-//       font-size: 0.9rem;
-//       color: #b3b3b3;
-//     }
-//   }
+    @include above('tablet-large') {
+      text-align: right;
+    }
+    .sale-price,
+    .regular-price {
+      font-weight: 600;
+    }
+    .regular-price {
+      color: color('red');
+      text-decoration: line-through;
+    }
+    a {
+      color: color('text');
+      text-decoration: none;
+    }
+  }
 
-//   .btn-holder {
-//     text-align: right;
-//   }
-// }
+  .thumb-footer {
+    margin-top: 1rem;
+    > .row {
+      align-items: flex-start;
+    }
+  }
+
+  .desc {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    > p {
+      font-size: 0.9rem;
+      color: #b3b3b3;
+    }
+  }
+
+  .btn-holder {
+    text-align: right;
+  }
+}
