@@ -84,111 +84,34 @@ A few issues with this workflow that I'm working on a solution for:
 - If a Webpack entry file is deleted, how to also remove the generated output files from `dist/assets/`. The `clean-webpack-plugin` removes the entire dist folder which git tracks as new changes to every file in the directory, so that is not an option.
 - Currently, if the same vendor module is imported in a layout and template entry file, that code will be included twice. How to split out vendor file imports but also make them available in the necessary modules.
 
-#### Basic structure
+#### Basic folders structure 
 ```
 ├── assets
-│   ├── favicon, fonts, images, svg
+│   ├── favicon
+│   ├── fonts
+│   ├── images
+│   └── svg
 ├── config
-│   └── theme settings
 ├── design-tokens
-│   ├── _animation.scss
-│   ├── _helper-mixins.scss
-│   ├── _colors.scss
-│   ├── _layouts.scss
-│   ├── _layouts.scss
-│   ├── _sizes.scss
-│   ├── _typography.scss
-│   └── index.scss
 ├── js / bundles
 │   ├── components
-│   │   └── navigation.js
 │   ├── layout
-│   │   ├── theme.js
-│   │   └── optional alternate layouts
 │   └── templates
-│       ├── customers
-│       │   ├── account.js
-│       │   ├── activate_account.js
-│       │   ├── addresses.js
-│       │   ├── login.js
-│       │   ├── order.js
-│       │   ├── register.js
-│       │   └── reset_password.js
-│       ├── 404.js
-│       ├── article.js
-│       ├── blog.js
-│       ├── cart.js
-│       ├── collection.js
-│       ├── gift_card.js
-│       ├── index.js
-│       ├── list-collections.js
-│       ├── page.contact.js
-│       ├── page.js
-│       ├── product.js
-│       └── search.js
+│       └── customers
 ├── liquid
 │   ├── layout
-│   │   ├── theme.liquid
-│   │   └── optional alternate layouts
 │   ├── sections
-│   │   └── theme sections
 │   ├── snippets
-│   │   └── theme snippets
 │   └── templates
-│       ├── customers
-│       │   ├── account.liquid
-│       │   ├── activate_account.liquid
-│       │   ├── addresses.liquid
-│       │   ├── login.liquid
-│       │   ├── order.liquid
-│       │   ├── register.liquid
-│       │   └── reset_password.liquid
-│       ├── 404.liquid
-│       ├── article.liquid
-│       ├── blog.liquid
-│       ├── cart.liquid
-│       ├── collection.liquid
-│       ├── gift_card.liquid
-│       ├── index.liquid
-│       ├── list-collections.liquid
-│       ├── page.contact.liquid
-│       ├── page.liquid
-│       ├── password.liquid
-│       ├── product.liquid
-│       └── search.liquid
+│       └── customers
 ├── locales
-│   └── theme locales
-├── styles
-│   ├── components
-│   │   ├── global
-│   │   │    └── global files
-│   │   └── shared
-│   │   │    └── shared files
-│   ├── layout
-│   │   ├── theme.scss
-│   │   └── optional alternate layouts
-│   └── templates
-│       ├── customers
-│       │   ├── account.scss
-│       │   ├── activate_account.scss
-│       │   ├── addresses.scss
-│       │   ├── login.scss
-│       │   ├── order.scss
-│       │   ├── register.scss
-│       │   └── reset_password.scss
-│       ├── 404.scss
-│       ├── article.scss
-│       ├── blog.scss
-│       ├── cart.scss
-│       ├── collection.scss
-│       ├── collection.list.scss
-│       ├── gift_card.scss
-│       ├── index.scss
-│       ├── list-collections.scss
-│       ├── page.contact.scss
-│       ├── page.scss
-│       ├── product.scss
-│       └── search.scss
+└── styles
+    ├── components
+    │   ├── global
+    │   └── shared
+    ├── layout
+    └── templates
+        └── customers
 ```
 
 #### ESlint (JavaScript Guidelines)
