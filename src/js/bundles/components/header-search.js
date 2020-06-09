@@ -6,12 +6,15 @@ export default() => {
 
     const cacheDom = () => {
       dom.searchWindowHandle = document.getElementById('searchWindowHandle');
+      dom.searchWindowTrigger = document.querySelectorAll('.search-window-open');
       dom.closeSearchWindow = document.getElementById('closeSearchWindow');
       dom.searchWindow = document.getElementsByClassName('search-window')[0];
     }
 
+    console.log(dom);
+
     const bindUIActions = () => {
-      dom.searchWindowHandle.addEventListener('click', searchWindowOpen);
+      dom.searchWindowTrigger.forEach(element => element.addEventListener('click', searchWindowOpen));
       dom.closeSearchWindow.addEventListener('click', searchWindowClose);
     }
 
