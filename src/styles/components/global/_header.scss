@@ -1,5 +1,7 @@
 @import 'header-login';
 @import 'navigation';
+@import 'mobile-navigation';
+@import 'header-search';
 
 .site-header {
   @include padding(1rem, null, 1rem, null);

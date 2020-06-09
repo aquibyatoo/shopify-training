@@ -1,0 +1,100 @@
+.close-search-window {
+  z-index: 3;
+  height: 20px;
+  width: 20px;
+  overflow: hidden;
+  color: transparent;
+  white-space: nowrap;
+  text-indent: 100%;
+  position: relative;
+  float: right;
+  span {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background 0.3s;
+  }
+  span::before {
+    transform: translateY(-8px);
+  }
+  span::after {
+    transform: translateY(8px);
+  }
+  span::before,
+  span::after {
+    content: '';
+    top: 0;
+    left: 0;
+    transition: background 0.3s, transform 0.3s;
+  }
+  span,
+  span::before,
+  span::after {
+    position: absolute;
+    height: 2px;
+    width: 23px;
+    background: color('text');
+  }
+}
+
+.search-window {
+  display: none;
+  &.active {
+    display: block;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: white;
+    overflow: auto;
+    padding: 8rem 1rem;
+
+    @include above('tablet') {
+      position: inherit;
+      padding: 8rem 10rem;
+    }
+  }
+
+  .search-holder {
+    max-width: 400px;
+    margin: auto;
+  }
+  h5 {
+    margin-bottom: 2rem;
+  }
+
+  .close-search-window {
+    span {
+      background: transparent;
+    }
+    span::before {
+      transform: rotate(-45deg);
+    }
+    span::after {
+      transform: rotate(45deg);
+    }
+    span::before,
+    span::after {
+      background: color('text');
+    }
+  }
+}
+
+.search-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  position: relative;
+  .input-group-append {
+    position: absolute;
+    display: flex;
+    margin-left: -1px;
+    width: 50px;
+    height: 46px;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+  }
+}
