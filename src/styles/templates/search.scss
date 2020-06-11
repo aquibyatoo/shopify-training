@@ -1,0 +1,63 @@
+/*
+ * Import style components for the current template.
+ *
+ * Write your own styles after imports.
+ *
+ * Design tokens are required and encapsulated for each template.
+ * Import it from the design-tokens folder.
+ */
+
+// Design tokens
+@import "./src/design-tokens/index";
+
+.search-template {
+  max-width: 20rem;
+  margin: auto;
+
+  @include above('tablet') {
+    max-width: 40rem;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+}
+
+.result-holder {
+  width: 100%;
+  margin-top: 0.8rem;
+  .result-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0.375rem 0;
+    line-height: 1.5rem;
+
+    @include above('tablet') {
+      flex-direction: row;
+    }
+
+    .featured-search-image {
+      margin: 0 0 1.2rem 0;
+      display: block;
+      width: 100%;
+
+      @include above('tablet') {
+        margin: 0 1.2rem 0 0;
+        max-width: 15rem;
+      }
+      img {
+        width: 100%;
+      }
+    }
+
+    h5 {
+      margin-bottom: 0.8rem;
+    }
+
+    p {
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+    }
+  }
+}
