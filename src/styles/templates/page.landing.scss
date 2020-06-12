@@ -1,0 +1,52 @@
+/*
+ * Import style components for the current template.
+ *
+ * Write your own styles after imports.
+ *
+ * Design tokens are required and encapsulated for each template.
+ * Import it from the design-tokens folder.
+ */
+
+// Design tokens
+@import "./src/design-tokens/index";
+
+// Logos
+
+.flex-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+
+// Hero
+
+.hero-cover {
+  height: 100%;
+  min-height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 40rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  h1,
+  h2 {
+    color: white;
+  }
+  h1 {
+    font-weight: 200;
+    text-transform: uppercase;
+  }
+  .h2 {
+    margin-bottom: 1rem;
+  }
+}
+
