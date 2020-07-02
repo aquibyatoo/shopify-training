@@ -36,12 +36,6 @@ Shopify theme is constructed in the way to add or remove any component without b
 **Modular CSS and JS:**
 CSS and JS is written in the way to reuse components in other projects.
 
-**E2E Testing:** 
-End to End testing configuration included. 
-
-**ADA:**
-Accessibility compliant. 
-
 **Speed Optimization**
 Modern speed optimization techniques applied. 
 
