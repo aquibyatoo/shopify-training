@@ -1,4 +1,4 @@
-# 📦 Shopify Theme Development Tool
+# 📦 Shopify Shell
 
 ## System Requirements
 - [Node](https://nodejs.org/en/) (v10.16.3+)
