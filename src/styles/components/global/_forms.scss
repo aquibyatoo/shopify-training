@@ -40,4 +40,16 @@ label {
     background-color: color('light-grey');
     opacity: 1;
   }
+
+  &.bottom-border {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    &:focus {
+      color: color('grey');
+      outline: none;
+      border-bottom: 1px solid color('grey');
+    }
+  }
 }

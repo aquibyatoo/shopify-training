@@ -1,5 +1,5 @@
 export default() => {
-  (function (navigation) {
+  (function (mobileNavigation) {
     'use strict';
 
     const dom = {};
@@ -14,7 +14,6 @@ export default() => {
     }
 
     const toggleNavigation = () => {
-      event.preventDefault();
       dom.body.classList.toggle('nav-open');
     }
 
@@ -23,7 +22,7 @@ export default() => {
       bindUIActions();
     }
 
-    navigation.init = init;
+    mobileNavigation.init = init;
 
-  })((window.navigation = window.navigation || {}));
+  })((window.mobileNavigation = window.mobileNavigation || {}));
 }

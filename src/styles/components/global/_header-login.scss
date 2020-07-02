@@ -24,7 +24,7 @@
     .label {
       margin-left: 5px;
 
-      @include below('tablet') {
+      @include below('tablet-large') {
         display: none;
       }
     }

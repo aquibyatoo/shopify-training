@@ -22,6 +22,11 @@ body {
   @include use-text-style('body');
 
   color: color('text');
+
+  &.nav-open {
+    height: 100vh;
+    overflow-y: hidden;
+  }
 }
 
 body,

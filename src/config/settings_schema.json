@@ -49,6 +49,27 @@
     ]
   },
   {
+    "name": "Search",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "predictive_search_enabled",
+        "label": "Enable product suggestions",
+        "info": "This will also affect the search field on the search page."
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_vendor",
+        "label": "Show vendor"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_price",
+        "label": "Show price"
+      }
+    ]
+  },
+  {
     "name": "Social media",
     "settings": [
       {
