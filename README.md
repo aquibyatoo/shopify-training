@@ -1,5 +1,50 @@
 # 📦 Shopify Shell
 
+This Projects aim to give access to a better, smoother and more modern workflow for building, testing and deploying Shopify themes and websites. It also include reusable components. 
+
+This project is learning after working with Shopify from last several years so the goal behind this project is to reduce some of the downsides of working within the Shopify ecosystem and bring forward some of the nice features and benefits we get while building custom e-commerce websites (PWA) outside of it.
+
+## Supported Features
+
+**Module Bundling:** 
+We are using Webpack 4 to bundle and optimize all your Javascript and SCSS modules.
+
+**Code Splitting:** 
+Webpack creates pages and templates based on bundles rather than huge global bundles.
+
+**Asset Optimization:**
+Webpack will go through each and every asset and optimize them while building for production.
+
+**Sourcemaps:** 
+Provides support for JS and Sass sourcemaps when you are in development mode.
+
+**JS Code Linting:**
+ESlint is part of the build process. Predefined rules for .eslintrc in the project. 
+
+**SCSS Code Linting:**
+Stylelint is part of the build process. Predefined rules for .stylelintrc in the project. 
+
+**Safe Watch and Deploy:**
+Multiple checks to prevent to push in live theme. This minimizes the risks of deploying changes to the live site while in local development.
+
+**Design Token System:**
+Integrated SCSS advance and optimized token system to standardize styling rules (Breakpoints, Grid, Typography, etc) of Anatta 
+
+**Modular Theme:** 
+Shopify theme is constructed in the way to add or remove any component without breaking anything.  
+
+**Modular CSS and JS:**
+CSS and JS is written in the way to reuse components in other projects.
+
+**E2E Testing:** 
+End to End testing configuration included. 
+
+**ADA:**
+Accessibility compliant. 
+
+**Speed Optimization**
+Modern speed optimization techniques applied. 
+
 ## System Requirements
 - [Node](https://nodejs.org/en/) (v10.16.3+)
 - [NPM 5+](https://docs.npmjs.com/try-the-latest-stable-version-of-npm)
