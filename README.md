@@ -39,6 +39,16 @@ CSS and JS is written in the way to reuse components in other projects.
 **Speed Optimization**
 Modern speed optimization techniques applied. 
 
+
+## Know Issues
+A few issues with this workflow that I'm working on a solution for:
+- If a Webpack entry file is deleted, how to also remove the generated output files from `dist/assets/`. The `clean-webpack-plugin` removes the entire dist folder which git tracks as new changes to every file in the directory, so that is not an option.
+- Currently, if the same vendor module is imported in a layout and template entry file, that code will be included twice. How to split out vendor file imports but also make them available in the necessary modules.
+
+## Report an issue
+- If you find any issue while using this tool, use github issues to submit with proper information.
+
+
 ## System Requirements
 - [Node](https://nodejs.org/en/) (v10.16.3+)
 - [NPM 5+](https://docs.npmjs.com/try-the-latest-stable-version-of-npm)
@@ -118,11 +128,6 @@ If your store is on Shopify Plus, you'll need to do the following:
 - If you update or switch node versions using `nvm`, you may need to run `npm rebuild node-sass` to refresh node-sass for your current environment.
 - When merging 2 git feature branches, you only need to resolve the conlficts inside `src/`. Any conflicts inside `dist/` can be resolved with `npm run build`. Always run `npm run build` after resolving merge conflicts.
 
-## Under Construction
-A few issues with this workflow that I'm working on a solution for:
-- If a Webpack entry file is deleted, how to also remove the generated output files from `dist/assets/`. The `clean-webpack-plugin` removes the entire dist folder which git tracks as new changes to every file in the directory, so that is not an option.
-- Currently, if the same vendor module is imported in a layout and template entry file, that code will be included twice. How to split out vendor file imports but also make them available in the necessary modules.
-
 #### Basic folders structure 
 ```
 ├── assets
@@ -160,4 +165,3 @@ https://eslint.org/docs/rules/
 #### Stylelint (Sass Guidelines)
 https://github.com/stylelint/stylelint-config-standard
 
-#### Changelog
