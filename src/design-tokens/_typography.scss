@@ -10,17 +10,20 @@ $fonts: (
       'Arial',
       sans-serif,
     ),
-    'normal': '~assets/fonts/Gotham-Book',
-    'italic': '~assets/fonts/Gotham-BookItalic',
-    '300': '~assets/fonts/Gotham-Light',
-    '300 italic': '~assets/fonts/Gotham-LightItalic',
-    '500': '~assets/fonts/Gotham-Medium',
-    '500 italic': '~assets/fonts/Gotham-MediumItalic',
-    '700': '~assets/fonts/Gotham-Bold',
-    '700 italic': '~assets/fonts/Gotham-BoldItalic',
+    'normal': 'Gotham-Book',
+    'italic': 'Gotham-BookItalic',
+    '300': 'Gotham-Light',
+    '300 italic': 'Gotham-LightItalic',
+    '500': 'Gotham-Medium',
+    '500 italic': 'Gotham-MediumItalic',
+    '700': 'Gotham-Bold',
+    '700 italic': 'Gotham-BoldItalic',
   ),
   'primary': '#sans',
 );
+
+// Import all local fonts
+ @include import-webfonts;
 
 $typography: (
   'body': (
