@@ -9,10 +9,6 @@ import 'Styles/templates/customers/addresses.scss';
  * @namespace customerAddresses
  */
 
-// Browser Support
-import 'unfetch/polyfill';
-import 'es6-promise/auto';
-
 import {AddressForm} from '@shopify/theme-addresses';
 
 const selectors = {
