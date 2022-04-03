@@ -1,6 +1,10 @@
+//dependecies
 const bs = require("browser-sync").create('theme watch');
+const yaml = require('yaml');
+const fs = require('fs');
+var urlString = '';
 
-  //Not using arrow funtion, else "this" will point to window object
+//Not using arrow funtion, else "this" will point to window object
 function debounce(func, timeout = 1000){
   let timer;
   return (...args) => {
@@ -9,7 +13,7 @@ function debounce(func, timeout = 1000){
   };
 }
 
-var init = false;
+var init = false; //flag for init
 
 //HMR for css , this is not applicable for us as our css change, our js change as well, interesting idea tho
 // bs.watch("dist/assets/*.css", function (event, file) {
@@ -20,8 +24,6 @@ var init = false;
 // });
 
 class webpackThemeWatch {
-
-
   _watchChange(){
     bs.watch("/tmp/theme.updatetheme", function (event, file) {
       if (event === "change") {
@@ -32,7 +34,7 @@ class webpackThemeWatch {
 
   _init(){
     bs.init({
-      proxy: "https://jinglebaba.myshopify.com",
+      proxy: urlString,
       notify: false,
       logLevel: "silent",
       injectChanges: true,
@@ -50,11 +52,18 @@ class webpackThemeWatch {
   }
 
   apply(compiler) {
-    compiler.hooks.done.tap(
+    compiler.hooks.emit.tap(
       'Theme Watch',
       (
         stats
       ) => {
+        const configs = fs.readFileSync('./config.yml', 'utf8')
+        const {development: {store = null, theme_id = null} } = yaml.parse(configs);
+        if(!store || !theme_id) {
+          console.log('\x1b[31m','ERROR: Invalid config.yml');
+          process.exit(1);
+        }
+        urlString = `https://${store}?preview_theme_id=${theme_id}`;
         !init && this._init();
         this._watchChange();
       }
