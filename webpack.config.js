@@ -4,11 +4,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //extract css f
 const CopyPlugin = require("copy-webpack-plugin"); //copy assets p.s, webpack also watch for all the copied files
 const WebpackShellPluginNext = require('webpack-shell-plugin-next'); //execute shell commands
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
-const stats = mode === 'development' ? 'errors-warnings' : { children: false }; //hide or show warnings
+const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warnings
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist folder after each build
+const webpackThemeWatch = require('./themeWatch');
 
 module.exports = {
   mode,
+  stats,
   entry: glob.sync('./src/js/bundles/**/*.js').reduce((acc, path) => {
     const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
     acc[entry] = path;
@@ -25,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: './assets/bundle.[name].css.liquid'
+      filename: './assets/bundle.[name].css'
     }),
 
     new CopyPlugin({
@@ -60,9 +62,8 @@ module.exports = {
         }
       ],
     }),
-    new CleanWebpackPlugin() //this is required as we need to clean the chunks if they are no longer needed
+    new CleanWebpackPlugin(), //this is required as we need to clean the chunks if they are no longer needed
   ],
-  stats,
   module: {
     rules: [
       {
@@ -109,10 +110,11 @@ if (mode === 'development') {
       },
       onBuildEnd: {
         //initial deployment is required, as few chunks might have been changed, which wont be reflected unless deployed.
-        scripts: ['echo Build Complete 📦', 'theme watch --allow-live'],
+        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes','theme watch --allow-live --notify=/tmp/theme.updatetheme'],
         parallel: true
       }
-    })
+    }),
+    new webpackThemeWatch() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
   );
 }
 

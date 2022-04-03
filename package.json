@@ -11,7 +11,7 @@
   "scripts": {
     "build": "webpack",
     "deploy": "webpack && shopify-themekit deploy --allow-live",
-    "start": "NODE_ENV=development webpack --watch",
+    "start": " NODE_ENV=development webpack --watch",
     "eslint": "eslint 'src/js/**'",
     "stylelint": "stylelint '**/*.scss'",
     "add-all": "git add .",
@@ -28,7 +28,9 @@
     "webpack"
   ],
   "author": "@monkviper",
-  "contributors": ["@jingleBaba"],
+  "contributors": [
+    "@jingleBaba"
+  ],
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -52,12 +54,14 @@
     "accoutrement": "^2.1.3",
     "autoprefixer": "^10.4.4",
     "babel-loader": "^8.1.0",
+    "browser-sync": "^2.27.9",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
     "eslint": "^8.12.0",
     "glob": "^7.1.6",
     "husky": "^4.2.5",
+    "jquery": "^3.6.0",
     "mini-css-extract-plugin": "^2.6.0",
     "node-sass": "^7.0.1",
     "postcss-loader": "^6.2.1",
