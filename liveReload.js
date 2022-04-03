@@ -1,6 +1,6 @@
-
 const bs = require("browser-sync").create('theme watch');
 
+  //Not using arrow funtion, else "this" will point to window object
 function debounce(func, timeout = 1000){
   let timer;
   return (...args) => {
@@ -21,7 +21,7 @@ var init = false;
 
 class webpackThemeWatch {
 
-  //Not using arrow funtion, else "this" will point to window object
+
   _watchChange(){
     bs.watch("/tmp/theme.updatetheme", function (event, file) {
       if (event === "change") {
@@ -35,6 +35,7 @@ class webpackThemeWatch {
       proxy: "https://jinglebaba.myshopify.com",
       notify: false,
       logLevel: "silent",
+      injectChanges: true,
       snippetOptions: {
         rule: {
           match: /<head[^>]*>/i,

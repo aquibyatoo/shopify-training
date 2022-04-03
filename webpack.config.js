@@ -6,7 +6,7 @@ const WebpackShellPluginNext = require('webpack-shell-plugin-next'); //execute s
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warnings
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist folder after each build
-const webpackThemeWatch = require('./themeWatch');
+const liveReload = require('./liveReload');
 
 module.exports = {
   mode,
@@ -114,7 +114,7 @@ if (mode === 'development') {
         parallel: true
       }
     }),
-    new webpackThemeWatch() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
+    new liveReload() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
   );
 }
 
