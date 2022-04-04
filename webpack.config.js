@@ -27,9 +27,9 @@ module.exports = {
     ...layoutEntryPoints
   }, //webpack supports multiple entry as an object  {chunkname: entrypath}
   output: {
-    filename: './assets/bundle.[name].js', //added hash to prevent cache of changed modules
+    filename: './assets/bundle.[name].js',
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: './assets/bundle.[name].js?h=[contenthash]' //added hash for dynamically created chunk
+    chunkFilename: './assets/bundle.[name].js?h=[contenthash]' //added hash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
   },
   resolve: {
     alias: {
