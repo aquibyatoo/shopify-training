@@ -58,7 +58,7 @@ class webpackThemeWatch {
         stats
       ) => {
         const configs = fs.readFileSync('./config.yml', 'utf8')
-        const {development: {store = null, theme_id = null} } = yaml.parse(configs);
+        const {development: {store = null, theme_id = null} = {} } = yaml.parse(configs);
         if(!store || !theme_id) {
           console.log('\x1b[31m','ERROR: Invalid config.yml');
           process.exit(1);

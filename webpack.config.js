@@ -6,19 +6,30 @@ const WebpackShellPluginNext = require('webpack-shell-plugin-next'); //execute s
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warnings
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist folder after each build
-const liveReload = require('./liveReload');
+const liveReloadPlugin = require('./liveReload'); //custom webpack plugin for hotreloading based on theme watch status
+const templateEntryPoints = glob.sync('./src/js/bundles/templates/**.js').reduce((acc, path) => {
+  const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
+  acc[entry] = path;
+  return acc;
+}, {});
+
+const layoutEntryPoints = glob.sync('./src/js/bundles/layout/**.js').reduce((acc, path) => {
+  const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
+  acc[entry] = path;
+  return acc;
+}, {});
 
 module.exports = {
   mode,
   stats,
-  entry: glob.sync('./src/js/bundles/**/*.js').reduce((acc, path) => {
-    const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
-    acc[entry] = path;
-    return acc;
-  }, {}), //webpack supports multiple entry as an object  {chunkname: entrypath}
+  entry: {
+    ...templateEntryPoints,
+    ...layoutEntryPoints
+  }, //webpack supports multiple entry as an object  {chunkname: entrypath}
   output: {
-    filename: './assets/bundle.[name].js',
+    filename: './assets/bundle.[name].js', //added hash to prevent cache of changed modules
     path: path.resolve(__dirname, 'dist'),
+    chunkFilename: './assets/bundle.[name].js?h=[contenthash]' //added hash for dynamically created chunk
   },
   resolve: {
     alias: {
@@ -101,7 +112,8 @@ module.exports = {
 if (mode === 'development') {
   module.exports.devtool = false;
   module.exports.optimization = {
-    usedExports: true //to enable tree shaking for imported files on dev mode as well
+    chunkIds: "named",
+    usedExports: true, //to enable tree shaking for imported files on dev mode as well
   }
   module.exports.plugins.push(
     new WebpackShellPluginNext({
@@ -109,18 +121,18 @@ if (mode === 'development') {
         scripts: ['echo Webpack build in progress...🛠']
       },
       onBuildEnd: {
-        //initial deployment is required, as few chunks might have been changed, which wont be reflected unless deployed.
         scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes','theme watch --allow-live --notify=/tmp/theme.updatetheme'],
         parallel: true
       }
     }),
-    new liveReload() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
+    new liveReloadPlugin() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
   );
 }
 
 //minification,create chunks,treeshake on production
 if(mode === 'production') {
   module.exports.optimization = {
+    chunkIds: "named",
     usedExports: true, //check for ununsed exports for treeshaking within file
     splitChunks: {
       usedExports: true, //check for ununsed exports for treeshaking within chunk
@@ -128,7 +140,7 @@ if(mode === 'production') {
         default: false, //override default
         Vendors: {  //create a seperate chunk for vendor
           test: /[\\/]node_modules[\\/]/, //required both / & \ to support cross platform between unix and windows
-          priority: -10, //first priority
+          priority: -10, //Create a sepereate chunk for node_modules first
           name: 'vendors',
           minChunks: 1, //only create chunk for dependencies 
           chunks :'all', //create chunk for all sync , async and cjs modules
