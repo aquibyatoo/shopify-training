@@ -7,6 +7,8 @@ const mode = process.env.NODE_ENV === 'development' ? 'development' : 'productio
 const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warnings
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist folder after each build
 const liveReloadPlugin = require('./liveReload'); //custom webpack plugin for hotreloading based on theme watch status
+const { VueLoaderPlugin } = require('vue-loader')
+
 const templateEntryPoints = glob.sync('./src/js/bundles/templates/**.js').reduce((acc, path) => {
   const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
   acc[entry] = path;
@@ -26,21 +28,60 @@ module.exports = {
     ...templateEntryPoints,
     ...layoutEntryPoints
   }, //webpack supports multiple entry as an object  {chunkname: entrypath}
+  resolve: {
+    alias: {
+      Styles: path.resolve(__dirname, 'src/styles/'),
+      vue: 'vue/dist/vue.cjs.js'
+    }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.(sc|sa|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              url: false
+            }
+          },
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      },
+      //make sure to keep it last as it'll remove unused packages from node_modules, which removed vue-loader(spent 2 hours on figuring it out)
+      {
+        include: path.resolve(__dirname, "node_modules"),
+        sideEffects: false //external libraries wont treeshake without this, sideEffect refers that each imported modules is a pure function
+      }
+    ]
+  },
   output: {
     filename: './assets/bundle.[name].js',
     path: path.resolve(__dirname, 'dist'),
     chunkFilename: './assets/bundle.[name].js?h=[contenthash]' //added hash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
   },
-  resolve: {
-    alias: {
-      Styles: path.resolve(__dirname, 'src/styles/')
-    }
-  },
+
   plugins: [
+    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: './assets/bundle.[name].css'
     }),
-
     new CopyPlugin({
       patterns: [ //breaking change in webpack5 compability
         {
@@ -75,38 +116,8 @@ module.exports = {
     }),
     new CleanWebpackPlugin(), //this is required as we need to clean the chunks if they are no longer needed
   ],
-  module: {
-    rules: [
-      {
-        include: path.resolve(__dirname, "node_modules"),
-        sideEffects: false //external libraries wont treeshake without this, sideEffect refers that each imported modules is a pure function
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.(sc|sa|c)ss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              url: false
-            }
-          },
-          'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
-          }
-        ]
-      }
-    ]
-  },
+
+
 };
 //treeshake and watch on development
 if (mode === 'development') {
@@ -142,7 +153,7 @@ if(mode === 'production') {
           test: /[\\/]node_modules[\\/]/, //required both / & \ to support cross platform between unix and windows
           priority: -10, //Create a sepereate chunk for node_modules first
           name: 'vendors',
-          minChunks: 1, //only create chunk for dependencies 
+          minChunks: 1, //only create chunk for dependencies
           chunks :'all', //create chunk for all sync , async and cjs modules
         },
         common: { //create a common chunk
@@ -150,7 +161,7 @@ if(mode === 'production') {
           minChunks: 2, //minimum import for creating chunk
           name: 'common',
           priority: -20, //only includes the files that are not part of vendor chunk
-          minSize: 1000, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
+          minSize: 0, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
         },
       },
     }
