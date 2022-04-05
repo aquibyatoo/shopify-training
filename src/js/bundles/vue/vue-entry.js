@@ -4,6 +4,6 @@ import vueWrapper from "../utils/vue-wrapper"
 
 //Test Component
 import testComponent from '../vue/Test/testComponent.vue';
+export const Test = ( () => vueWrapper(testComponent, "Test", "#test-data"));
 
-
-export const Test = ( () => vueWrapper(testComponent, "Test"));
+///Other components here
