@@ -28,6 +28,30 @@ module.exports = {
     ...templateEntryPoints,
     ...layoutEntryPoints
   }, //webpack supports multiple entry as an object  {chunkname: entrypath}
+  optimization : {
+    chunkIds: "named",
+    usedExports: true, //check for ununsed exports for treeshaking within file
+    splitChunks: {
+      usedExports: true, //check for ununsed exports for treeshaking within chunk
+      cacheGroups: {
+        default: false, //override default
+        Vendors: {  //create a seperate chunk for vendor
+          test: /[\\/]node_modules[\\/]/, //required both / & \ to support cross platform between unix and windows
+          priority: -10, //Create a sepereate chunk for node_modules first
+          name: 'vendors',
+          minChunks: 1, //only create chunk for dependencies
+          chunks :'all', //create chunk for all sync , async and cjs modules
+        },
+        common: { //create a common chunk
+          chunks: "all", //create chunk for all sync , async and cjs modules
+          minChunks: 2, //minimum import for creating chunk
+          name: 'common',
+          priority: -20, //only includes the files that are not part of vendor chunk
+          minSize: 0, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
+        },
+      },
+    }
+  },
   resolve: {
     alias: {
       Styles: path.resolve(__dirname, 'src/styles/'),
@@ -122,10 +146,6 @@ module.exports = {
 //treeshake and watch on development
 if (mode === 'development') {
   module.exports.devtool = false;
-  module.exports.optimization = {
-    chunkIds: "named",
-    usedExports: true, //to enable tree shaking for imported files on dev mode as well
-  }
   module.exports.plugins.push(
     new WebpackShellPluginNext({
       onBuildStart: {
@@ -140,30 +160,4 @@ if (mode === 'development') {
   );
 }
 
-//minification,create chunks,treeshake on production
-if(mode === 'production') {
-  module.exports.optimization = {
-    chunkIds: "named",
-    usedExports: true, //check for ununsed exports for treeshaking within file
-    splitChunks: {
-      usedExports: true, //check for ununsed exports for treeshaking within chunk
-      cacheGroups: {
-        default: false, //override default
-        Vendors: {  //create a seperate chunk for vendor
-          test: /[\\/]node_modules[\\/]/, //required both / & \ to support cross platform between unix and windows
-          priority: -10, //Create a sepereate chunk for node_modules first
-          name: 'vendors',
-          minChunks: 1, //only create chunk for dependencies
-          chunks :'all', //create chunk for all sync , async and cjs modules
-        },
-        common: { //create a common chunk
-          chunks: "all", //create chunk for all sync , async and cjs modules
-          minChunks: 2, //minimum import for creating chunk
-          name: 'common',
-          priority: -20, //only includes the files that are not part of vendor chunk
-          minSize: 0, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
-        },
-      },
-    }
-  }
-}
+
