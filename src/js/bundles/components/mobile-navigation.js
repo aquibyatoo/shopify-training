@@ -16,7 +16,7 @@ export default() => {
     const toggleNavigation = () => {
       dom.body.classList.toggle('nav-open');
     }
-    console.log("hello");
+    console.log("hello worlds");
 
     const init = () => {
       cacheDom();

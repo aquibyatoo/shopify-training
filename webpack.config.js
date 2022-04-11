@@ -126,27 +126,12 @@ if (mode === 'development') {
         scripts: ['echo Webpack build in progress...🛠']
       },
       onBuildEnd: {
-        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes','theme watch --allow-live --notify=/tmp/theme.updatetheme'],
+        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes','yarn initialDeploy'],
         parallel: true
       }
     }),
     new liveReloadPlugin() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
   );
-  module.exports.optimization = {
-    splitChunks: {
-      cacheGroups: {
-        default: false, //override default
-        common: { //create a common chunk
-          chunks: "all", //create chunk for all sync , async and cjs modules
-          minChunks: 2, //minimum import for creating chunk
-          name: 'common',
-          priority: -20, //only includes the files that are not part of vendor chunk
-          minSize: 1000, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb,
-          reuseExistingChunk: true
-        },
-      },
-    }
-  }
 }
 
 //minification,create chunks,treeshake on production
@@ -169,7 +154,7 @@ if(mode === 'production') {
           minChunks: 2, //minimum import for creating chunk
           name: 'common',
           priority: -20, //only includes the files that are not part of vendor chunk
-          minSize: 1000, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
+          minSize: 0, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
         },
       },
     }

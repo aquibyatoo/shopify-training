@@ -16,7 +16,8 @@
     "eslint": "eslint 'src/js/**'",
     "stylelint": "stylelint '**/*.scss'",
     "add-all": "git add .",
-    "theme": "shopify-themekit"
+    "theme": "shopify-themekit",
+    "initialDeploy": "theme deploy --allow-live && theme watch --allow-live --notify=/tmp/theme.updatetheme"
   },
   "husky": {
     "hooks": {
