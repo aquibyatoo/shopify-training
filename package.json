@@ -11,12 +11,13 @@
   ],
   "scripts": {
     "build": "webpack",
-    "deploy": "webpack && shopify-themekit deploy --allow-live",
+    "deploy": "webpack && shopify-themekit deploy",
     "start": " NODE_ENV=development webpack --watch",
     "eslint": "eslint 'src/js/**'",
     "stylelint": "stylelint '**/*.scss'",
     "add-all": "git add .",
-    "theme": "shopify-themekit"
+    "theme": "shopify-themekit",
+    "initialDeploy": "theme deploy && theme watch --notify=/tmp/theme.updatetheme"
   },
   "husky": {
     "hooks": {
