@@ -22,7 +22,6 @@ export default() => {
       cacheDom();
       bindUIActions();
     }
-
     mobileNavigation.init = init;
 
   })((window.mobileNavigation = window.mobileNavigation || {}));
