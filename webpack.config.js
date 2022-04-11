@@ -28,30 +28,6 @@ module.exports = {
     ...templateEntryPoints,
     ...layoutEntryPoints
   }, //webpack supports multiple entry as an object  {chunkname: entrypath}
-  optimization : {
-    chunkIds: "named",
-    usedExports: true, //check for ununsed exports for treeshaking within file
-    splitChunks: {
-      usedExports: true, //check for ununsed exports for treeshaking within chunk
-      cacheGroups: {
-        default: false, //override default
-        Vendors: {  //create a seperate chunk for vendor
-          test: /[\\/]node_modules[\\/]/, //required both / & \ to support cross platform between unix and windows
-          priority: -10, //Create a sepereate chunk for node_modules first
-          name: 'vendors',
-          minChunks: 1, //only create chunk for dependencies
-          chunks :'all', //create chunk for all sync , async and cjs modules
-        },
-        common: { //create a common chunk
-          chunks: "all", //create chunk for all sync , async and cjs modules
-          minChunks: 2, //minimum import for creating chunk
-          name: 'common',
-          priority: -20, //only includes the files that are not part of vendor chunk
-          minSize: 0, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
-        },
-      },
-    }
-  },
   resolve: {
     alias: {
       Styles: path.resolve(__dirname, 'src/styles/'),
@@ -98,7 +74,7 @@ module.exports = {
   output: {
     filename: './assets/bundle.[name].js',
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: './assets/bundle.[name].js?h=[contenthash]' //added hash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
+    chunkFilename: './assets/bundle.[name].js?h=[hash]' //added hash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
   },
 
   plugins: [
@@ -141,8 +117,8 @@ module.exports = {
     new CleanWebpackPlugin(), //this is required as we need to clean the chunks if they are no longer needed
   ],
 
-
 };
+
 //treeshake and watch on development
 if (mode === 'development') {
   module.exports.devtool = false;
@@ -158,6 +134,48 @@ if (mode === 'development') {
     }),
     new liveReloadPlugin() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
   );
+  module.exports.optimization = {
+    splitChunks: {
+      cacheGroups: {
+        default: false, //override default
+        common: { //create a common chunk
+          chunks: "all", //create chunk for all sync , async and cjs modules
+          minChunks: 2, //minimum import for creating chunk
+          name: 'common',
+          priority: -20, //only includes the files that are not part of vendor chunk
+          minSize: 1000, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb,
+          reuseExistingChunk: true
+        },
+      },
+    }
+  }
+}
+
+//minification,create chunks,treeshake on production
+if(mode === 'production') {
+  module.exports.optimization = {
+    usedExports: true, //check for ununsed exports for treeshaking within file
+    splitChunks: {
+      usedExports: true, //check for ununsed exports for treeshaking within chunk
+      cacheGroups: {
+        default: false, //override default
+        Vendors: {  //create a seperate chunk for vendor
+          test: /[\\/]node_modules[\\/]/, //required both / & \ to support cross platform between unix and windows
+          priority: -10, //first priority
+          name: 'vendors',
+          minChunks: 1, //only create chunk for dependencies 
+          chunks :'all', //create chunk for all sync , async and cjs modules
+        },
+        common: { //create a common chunk
+          chunks: "all", //create chunk for all sync , async and cjs modules
+          minChunks: 2, //minimum import for creating chunk
+          name: 'common',
+          priority: -20, //only includes the files that are not part of vendor chunk
+          minSize: 1000, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
+        },
+      },
+    }
+  }
 }
 
 
