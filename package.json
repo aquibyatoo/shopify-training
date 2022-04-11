@@ -17,7 +17,7 @@
     "stylelint": "stylelint '**/*.scss'",
     "add-all": "git add .",
     "theme": "shopify-themekit",
-    "initialDeploy": "theme deploy && theme watch --notify=/tmp/theme.updatetheme"
+    "initialDeploy": "shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme"
   },
   "husky": {
     "hooks": {
