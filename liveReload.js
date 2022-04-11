@@ -63,7 +63,7 @@ class webpackThemeWatch {
           console.log('\x1b[31m','ERROR: Invalid config.yml');
           process.exit(1);
         }
-        urlString = `https://${store}?preview_theme_id=${theme_id}`;
+        urlString = `https://${store}?_ab=0&_fd=0&_sc=1&preview_theme_id=${theme_id}`;
         !init && this._init();
         this._watchChange();
       }
