@@ -21,16 +21,6 @@ export default (parentComponent = null,el = null,propsEl = null) => {
     return;
   }
   const propData =  transformProps(propsEl);
-  const options = {
-    el,
-    data(){ return {propData}},
-    components: {
-      parentComponent
-    },
-    template: `<parent-component :data="propData" />`
-  }
-  const app = createApp(options);
-  app.config.devtools = true
-  app.mount(el);
+  const app = createApp(parentComponent, {data:propData}).mount(el);
   return app;
 }
