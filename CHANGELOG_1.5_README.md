@@ -185,6 +185,16 @@ if(mode === 'production') {
 }
 ```
 
+::: Note
+For Vue-2 version replace alias to
+```resolve: {
+    alias: {
+      Styles: path.resolve(__dirname, 'src/styles/'),
+      vue: 'vue/dist/vue.esm.js'
+    }
+  }
+```
+
 ## package.json
 
 ### Vue 3 - Make sure to add your project specific modules/dependencies
