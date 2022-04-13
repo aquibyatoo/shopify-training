@@ -2,6 +2,8 @@
 const bs = require("browser-sync").create('theme watch');
 const yaml = require('yaml');
 const fs = require('fs');
+require('dotenv').config()
+
 var urlString = '';
 
 //Not using arrow funtion, else "this" will point to window object
@@ -12,6 +14,9 @@ function debounce(func, timeout = 1000){
     timer = setTimeout(() => { func.apply(this, args); }, timeout);
   };
 }
+
+const enableLiveReload = JSON.parse(process.env.LIVE_RELOAD ?? true);
+console.log(enableLiveReload);
 
 var init = false; //flag for init
 
@@ -63,7 +68,13 @@ class webpackThemeWatch {
           console.log('\x1b[31m','ERROR: Invalid config.yml');
           process.exit(1);
         }
+        if(enableLiveReload) {
         urlString = `https://${store}?_ab=0&_fd=0&_sc=1&preview_theme_id=${theme_id}`;
+        }
+        else {
+          urlString = `https://${store}?preview_theme_id=${theme_id}`
+        }
+        console.log(urlString);
         !init && this._init();
         this._watchChange();
       }
