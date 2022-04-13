@@ -117,6 +117,7 @@ module.exports = {
     new CleanWebpackPlugin(), //this is required as we need to clean the chunks if they are no longer needed
   ],
 };
+
 //treeshake and watch on development
 if (mode === 'development') {
   module.exports.devtool = false;
@@ -126,7 +127,7 @@ if (mode === 'development') {
         scripts: ['echo Webpack build in progress...🛠']
       },
       onBuildEnd: {
-        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes','yarn initialDeploy'],
+        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes','shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme'],
         parallel: true
       }
     }),
@@ -146,20 +147,23 @@ if(mode === 'production') {
           test: /[\\/]node_modules[\\/]/, //required both / & \ to support cross platform between unix and windows
           priority: -10, //first priority
           name: 'vendors',
-          minChunks: 1, //only create chunk for dependencies 
-          chunks :'all', //create chunk for all sync , async and cjs modules
+          minChunks: 1, //only create chunk for dependencies
+          chunks :'all',
+          minSize: 2000,
+          type: 'js',
+          enforce: true //create chunk for all sync , async and cjs modules
         },
         common: { //create a common chunk
           chunks: "all", //create chunk for all sync , async and cjs modules
           minChunks: 2, //minimum import for creating chunk
           name: 'common',
           priority: -20, //only includes the files that are not part of vendor chunk
-          minSize: 0, //minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
+          minSize: 1000,//minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
+          type: 'js'
         },
       },
     }
   }
 }
-
 
 

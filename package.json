@@ -14,10 +14,7 @@
     "deploy": "webpack && shopify-themekit deploy",
     "start": " NODE_ENV=development webpack --watch",
     "eslint": "eslint 'src/js/**'",
-    "stylelint": "stylelint '**/*.scss'",
-    "add-all": "git add .",
-    "theme": "shopify-themekit",
-    "initialDeploy": "shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme"
+    "stylelint": "stylelint '**/*.scss'"
   },
   "husky": {
     "hooks": {
@@ -63,6 +60,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
+    "dotenv": "^16.0.0",
     "eslint": "^8.12.0",
     "glob": "^7.1.6",
     "husky": "^4.2.5",
