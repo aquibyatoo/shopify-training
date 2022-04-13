@@ -5,8 +5,10 @@ This Projects aim to give access to a better, smoother and more modern workflow 
 This project is learning after working with Shopify from last several years so the goal behind this project is to reduce some of the downsides of working within the Shopify ecosystem and bring forward some of the nice features and benefits we get while building custom e-commerce websites (PWA) outside of it.
 
 ## Shopify Shell Store Details
-**Store link:** [https://anattadesign.myshopify.com/admin/themes?channel=true]
-**Live Example:** [https://anattadesign.myshopify.com]
+**Store link:** [Store](https://anattadesign.myshopify.com/admin/themes?channel=true)
+
+**Live Example:** [Example](https://anattadesign.myshopify.com)
+
 ## Supported Features
 
 **Module Bundling:** 
