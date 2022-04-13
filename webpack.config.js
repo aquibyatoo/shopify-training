@@ -128,7 +128,7 @@ if (mode === 'development') {
         scripts: ['echo Webpack build in progress...🛠']
       },
       onBuildEnd: {
-        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes','yarn initialDeploy'],
+        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes','shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme'],
         parallel: true
       }
     }),
