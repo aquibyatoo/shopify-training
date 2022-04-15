@@ -16,7 +16,6 @@ function debounce(func, timeout = 1000){
 }
 
 const enableLiveReload = JSON.parse(process.env.LIVE_RELOAD ?? true);
-console.log(enableLiveReload);
 
 var init = false; //flag for init
 
@@ -74,7 +73,6 @@ class webpackThemeWatch {
         else {
           urlString = `https://${store}?preview_theme_id=${theme_id}`
         }
-        console.log(urlString);
         !init && this._init();
         this._watchChange();
       }
