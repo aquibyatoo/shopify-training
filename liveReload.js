@@ -4,7 +4,23 @@ const yaml = require('yaml');
 const fs = require('fs');
 require('dotenv').config()
 
-var urlString = '';
+//variables
+let init = false; //flag for init
+let urlString = '';
+
+//get url data from config.yml
+const configs = fs.readFileSync('./config.yml', 'utf8')
+const {development: {store = null, theme_id = null} = {} } = yaml.parse(configs);
+
+//check .env file and get reload flag
+const enableLiveReload = JSON.parse(process.env.LIVE_RELOAD ?? false); //default value set to false
+
+if(enableLiveReload) {
+  urlString = `https://${store}?_ab=0&_fd=0&_sc=1&preview_theme_id=${theme_id}`;
+  }
+  else {
+    urlString = `https://${store}?preview_theme_id=${theme_id}`
+}
 
 //Not using arrow funtion, else "this" will point to window object
 function debounce(func, timeout = 1000){
@@ -14,10 +30,6 @@ function debounce(func, timeout = 1000){
     timer = setTimeout(() => { func.apply(this, args); }, timeout);
   };
 }
-
-const enableLiveReload = JSON.parse(process.env.LIVE_RELOAD ?? true);
-
-var init = false; //flag for init
 
 //HMR for css , this is not applicable for us as our css change, our js change as well, interesting idea tho
 // bs.watch("dist/assets/*.css", function (event, file) {
@@ -61,17 +73,9 @@ class webpackThemeWatch {
       (
         stats
       ) => {
-        const configs = fs.readFileSync('./config.yml', 'utf8')
-        const {development: {store = null, theme_id = null} = {} } = yaml.parse(configs);
         if(!store || !theme_id) {
           console.log('\x1b[31m','ERROR: Invalid config.yml');
           process.exit(1);
-        }
-        if(enableLiveReload) {
-        urlString = `https://${store}?_ab=0&_fd=0&_sc=1&preview_theme_id=${theme_id}`;
-        }
-        else {
-          urlString = `https://${store}?preview_theme_id=${theme_id}`
         }
         !init && this._init();
         this._watchChange();
