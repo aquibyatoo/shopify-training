@@ -1,14 +1,11 @@
 import 'Styles/templates/index.scss';
-import mobileNavigation from '../components/mobile-navigation';
-
-import {test} from '../vue/Test/test';
-test();
-mobileNavigation();
-console.log("new consoles");
-
+import vueWrapper from '../utils/vue-wrapper';
+import testComponent from '../vue/Test/TestComponent.vue';
 
 document.addEventListener('click', async() => {
-    const module = await import(/* webpackChunkName: "print" */ '../components/print');
+    const module = await import(/* webpackChunkName: "print" */ '../components/print')
     const print = module.default;
     print();
 });
+
+vueWrapper(testComponent, "Test", "#test-data");
