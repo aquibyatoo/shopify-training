@@ -4,6 +4,11 @@ This Projects aim to give access to a better, smoother and more modern workflow 
 
 This project is learning after working with Shopify from last several years so the goal behind this project is to reduce some of the downsides of working within the Shopify ecosystem and bring forward some of the nice features and benefits we get while building custom e-commerce websites (PWA) outside of it.
 
+## Shopify Shell Store Details
+**Store link:** [Store](https://anattadesign.myshopify.com/admin/themes?channel=true)
+
+**Live Example:** [Example](https://anattadesign.myshopify.com)
+
 ## Supported Features
 
 **Module Bundling:** 
@@ -39,11 +44,33 @@ CSS and JS is written in the way to reuse components in other projects.
 **Speed Optimization**
 Modern speed optimization techniques applied. 
 
+**Lazyload Components:**
+ Each component either its plain js or vue , can be lazyloaded or import in demand.
+ Check more in here: https://github.com/anattadesign/Shopify-Shell/issues/19
+
+**Common chunks:**
+Components are reused or reference is provided if same component is being used in multiple places. 
+It is accomplished by creating a common chunk of the reused components.
+It doesn't allow code repetation, which means optimised production build.
+Check more in here: https://github.com/anattadesign/Shopify-Shell/issues/18
+
+**Tree shaking:**
+We might have imported modules, either 3rd party or custom components that are imported but not being used. 
+Tree shaking refers to discard those import or any defined code that are not used(dead code). 
+This feature eliminate these dead codes.
+Check more in here: https://github.com/anattadesign/Shopify-Shell/issues/17
+
+**Venodr chunks:**
+All the 3rd party modules, that are being used in codebase is seperated out to vendor chunks. 
+There is a rare chance for these modules to be updated, which in turns provides cacheing , so that these
+large files(3rd party modules) are not loaded every time, which means performance boost.
+
+**HMR:**
+Once files are uploaded to shopify using themekit, browser will autoreload the webpage.
+Check more in here: https://github.com/anattadesign/Shopify-Shell/issues/20
 
 ## Know Issues
-A few issues with this workflow that I'm working on a solution for:
-- If a Webpack entry file is deleted, how to also remove the generated output files from `dist/assets/`. The `clean-webpack-plugin` removes the entire dist folder which git tracks as new changes to every file in the directory, so that is not an option.
-- Currently, if the same vendor module is imported in a layout and template entry file, that code will be included twice. How to split out vendor file imports but also make them available in the necessary modules.
+
 
 ## Report an issue
 - If you find any issue while using this tool, use github issues to submit with proper information.
@@ -77,6 +104,7 @@ A few issues with this workflow that I'm working on a solution for:
 #### Commands
 `npm start` or `yarn start`
 - Completes a Webpack build in **development** mode
+- deloy the initial build to the shopify
 - Webpack begins watching for file changes
 - Theme Kit begins watching for file changes in `dist/`
 - Theme Kit opens your development theme in your default browser
@@ -94,10 +122,11 @@ A few issues with this workflow that I'm working on a solution for:
 ### Webpack
 
 #### Entry Points
-All JavaScript files in the `js/bundles` directory & subdirectories are used as entry points. All other JavaScript modules should added to additional subdirectories of `js/`. An entry point file must be created for each liquid template file, including alternate templates. A CSS file for each template and layout should also be added to `styles/layout` and `styles/templates`. These CSS files should be imported at the top of each JavaScript entry file.
+All JavaScript files in the `js/bundles/layouts` and `js/bundles/templates`  directory & subdirectories are used as entry points. All other JavaScript modules should added to additional subdirectories of `js/`. An entry point file must be created for each liquid template file, including alternate templates. A CSS file for each template and layout should also be added to `styles/layout` and `styles/templates`. These CSS files should be imported at the top of each JavaScript entry file.
 
 #### Output Files
 Webpack will generate a JavaScript file for each template and layout file in the `bundles` directory. The CSS files imported in each bundle entry file will also generate CSS files. Webpack will add all output files to `dist/assets`.
+
 
 ### Theme Kit
 
