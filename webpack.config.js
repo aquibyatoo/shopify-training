@@ -7,7 +7,7 @@ const mode = process.env.NODE_ENV === 'development' ? 'development' : 'productio
 const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warnings
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist folder after each build
 const liveReloadPlugin = require('./liveReload'); //custom webpack plugin for hotreloading based on theme watch status
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader')
 
 const templateEntryPoints = glob.sync('./src/js/bundles/templates/**.js').reduce((acc, path) => {
   const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
@@ -31,7 +31,7 @@ module.exports = {
   resolve: {
     alias: {
       Styles: path.resolve(__dirname, 'src/styles/'),
-      vue: 'vue/dist/vue.esm.js'
+      vue: 'vue/dist/vue.cjs.js'
     }
   },
   module: {
@@ -116,6 +116,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(), //this is required as we need to clean the chunks if they are no longer needed
   ],
+
 };
 
 //treeshake and watch on development
@@ -165,5 +166,4 @@ if(mode === 'production') {
     }
   }
 }
-
 
