@@ -1,4 +1,4 @@
-## Change log Shopify Shell version 1.5
+## Change log Shopify Shell version 1.6
 
 ### Features
 
