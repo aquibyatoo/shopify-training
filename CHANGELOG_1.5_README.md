@@ -9,7 +9,7 @@
 
 ### Required files
 1. webpack.config.js
-2. package.json (Different packages for Vue-2 and Vue-3)
+2. package.json
 3. .bablrc (File with new content)
 4. livereload.js
 
@@ -48,7 +48,7 @@ module.exports = {
   resolve: {
     alias: {
       Styles: path.resolve(__dirname, 'src/styles/'),
-      vue: 'vue/dist/vue.cjs.js'
+      vue: 'vue/dist/vue.esm.js'
     }
   },
   module: {
@@ -185,18 +185,8 @@ if(mode === 'production') {
 }
 ```
 
-::: Note
-For Vue-2 version replace alias to
-```resolve: {
-    alias: {
-      Styles: path.resolve(__dirname, 'src/styles/'),
-      vue: 'vue/dist/vue.esm.js'
-    }
-  }
-```
 
-
-### Vue 2 - Make sure to add your project specific modules/dependencies
+### Make sure to add your project specific modules/dependencies
 ```
 {
   "name": "Anatta-Shopify-Development",
