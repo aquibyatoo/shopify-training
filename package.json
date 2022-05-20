@@ -5,9 +5,9 @@
   "private": true,
   "main": "webpack.config.js",
   "sideEffects": [
-    "**/**.css",
-    "**/**.scss",
-    "**/**.vue"
+    "*.css",
+    "*.scss",
+    "*.vue"
   ],
   "scripts": {
     "build": "webpack",
@@ -36,13 +36,8 @@
     "url": "https://github.com/anattadesign/shopify-starter.git"
   },
   "dependencies": {
-    "@shopify/theme-addresses": "^4.1.1",
-    "@shopify/theme-currency": "^4.1.1",
-    "es6-promise": "^4.2.8",
     "fs": "^0.0.1-security",
-    "js-cookie": "^2.2.1",
     "lazysizes": "^5.2.1",
-    "unfetch": "^4.1.0",
     "vue": "^3.2.31",
     "vue-loader": "^17.0.0",
     "vue-template-compiler": "^2.6.14",
@@ -57,7 +52,6 @@
     "autoprefixer": "^10.4.4",
     "babel-loader": "^8.1.0",
     "browser-sync": "^2.27.9",
-    "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
     "dotenv": "^16.0.0",

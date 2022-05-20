@@ -4,12 +4,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //extract css f
 const CopyPlugin = require("copy-webpack-plugin"); //copy assets p.s, webpack also watch for all the copied files
 const WebpackShellPluginNext = require('webpack-shell-plugin-next'); //execute shell commands
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
-const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warnings
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist folder after each build
+const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warning
 const liveReloadPlugin = require('./liveReload'); //custom webpack plugin for hotreloading based on theme watch status
 const { VueLoaderPlugin } = require('vue-loader')
 
-const templateEntryPoints = glob.sync('./src/js/bundles/templates/**.js').reduce((acc, path) => {
+const templateEntryPoints = glob.sync('./src/js/bundles/templates/**/**.js').reduce((acc, path) => {
   const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
   acc[entry] = path;
   return acc;
@@ -72,6 +71,7 @@ module.exports = {
     ]
   },
   output: {
+    clean: true,
     filename: './assets/bundle.[name].js',
     path: path.resolve(__dirname, 'dist'),
     chunkFilename: './assets/bundle.[name].js?h=[hash]' //added hash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
@@ -118,7 +118,6 @@ module.exports = {
         }
       ],
     }),
-    new CleanWebpackPlugin(), //this is required as we need to clean the chunks if they are no longer needed
   ],
 
 };
@@ -153,10 +152,10 @@ if(mode === 'production') {
           priority: -10, //first priority
           name: 'vendors',
           minChunks: 1, //only create chunk for dependencies
-          chunks :'all',
+          chunks :'all', //create chunk for all sync , async and cjs modules
           minSize: 2000,
-          type: 'js',
-          enforce: true //create chunk for all sync , async and cjs modules
+          type: /javascript/,
+          enforce: true 
         },
         common: { //create a common chunk
           chunks: "all", //create chunk for all sync , async and cjs modules
@@ -164,7 +163,7 @@ if(mode === 'production') {
           name: 'common',
           priority: -20, //only includes the files that are not part of vendor chunk
           minSize: 1000,//minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
-          type: 'js'
+          type: /javascript/
         },
       },
     }
