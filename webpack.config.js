@@ -63,18 +63,13 @@ module.exports = {
           }
         ]
       },
-      //make sure to keep it last as it'll remove unused packages from node_modules, which removed vue-loader(spent 2 hours on figuring it out)
-      {
-        include: path.resolve(__dirname, "node_modules"),
-        sideEffects: false //external libraries wont treeshake without this, sideEffect refers that each imported modules is a pure function
-      }
     ]
   },
   output: {
     clean: true,
     filename: './assets/bundle.[name].js',
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: './assets/bundle.[name].js?h=[hash]' //added hash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
+    chunkFilename: './assets/bundle.[name].js?[chunkhash]' //added hash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
   },
 
   plugins: [
@@ -131,7 +126,7 @@ if (mode === 'development') {
         scripts: ['echo Webpack build in progress...🛠']
       },
       onBuildEnd: {
-        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes','shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme'],
+        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes, starting initial deployment','shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme'],
         parallel: true
       }
     }),
@@ -149,7 +144,7 @@ if(mode === 'production') {
         default: false, //override default
         Vendors: {  //create a seperate chunk for vendor
           test: /[\\/]node_modules[\\/]/, //required both / & \ to support cross platform between unix and windows
-          priority: -10, //first priority
+          priority: 0,
           name: 'vendors',
           minChunks: 1, //only create chunk for dependencies
           chunks :'all', //create chunk for all sync , async and cjs modules
@@ -161,7 +156,23 @@ if(mode === 'production') {
           chunks: "all", //create chunk for all sync , async and cjs modules
           minChunks: 2, //minimum import for creating chunk
           name: 'common',
-          priority: -20, //only includes the files that are not part of vendor chunk
+          priority: -20, //if module shares multiple cache group , then set it to common by default.
+          minSize: 1000,//minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
+          type: /javascript/
+        },
+        product: { //create a common chunk
+          test: /[\\/]js[\\/]bundles[\\/]templates[\\/]\sproduct\s[\\/]/, //required both / & \ to support cross platform between unix and windows
+          chunks: "all", //create chunk for all sync , async and cjs modules
+          name: 'product',
+          priority: -10, //only includes the files that are not part of vendor chunk
+          minSize: 1000,//minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
+          type: /javascript/
+        },
+        collection: { //create a common chunk
+          test: /[\\/]js[\\/]bundles[\\/]templates[\\/]\scollection\s[\\/]/, //required both / & \ to support cross platform between unix and windows
+          chunks: "all", //create chunk for all sync , async and cjs modules
+          name: 'collection',
+          priority: -10, //only includes the files that are not part of vendor chunk
           minSize: 1000,//minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
           type: /javascript/
         },
