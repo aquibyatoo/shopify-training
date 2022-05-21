@@ -69,7 +69,7 @@ module.exports = {
     clean: true,
     filename: './assets/bundle.[name].js',
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: './assets/bundle.[name].js?[chunkhash]' //added hash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
+    chunkFilename: './assets/bundle.[name].js?[chunkhash]' //added chunkhash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
   },
 
   plugins: [
@@ -127,7 +127,7 @@ if (mode === 'development') {
       },
       onBuildEnd: {
         scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes, starting initial deployment','shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme'],
-        parallel: true
+        parallel: true //this is required to make webpack watch run in background.
       }
     }),
     new liveReloadPlugin() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
@@ -144,19 +144,16 @@ if(mode === 'production') {
         default: false, //override default
         Vendors: {  //create a seperate chunk for vendor
           test: /[\\/]node_modules[\\/]/, //required both / & \ to support cross platform between unix and windows
-          priority: 0,
-          name: 'vendors',
-          minChunks: 1, //only create chunk for dependencies
+          name: 'vendors',//only create chunk for dependencies
           chunks :'all', //create chunk for all sync , async and cjs modules
-          minSize: 2000,
           type: /javascript/,
-          enforce: true 
+          enforce: true // ignores minSize: 2000, minChunks: 1,priority: 0,
         },
         common: { //create a common chunk
           chunks: "all", //create chunk for all sync , async and cjs modules
           minChunks: 2, //minimum import for creating chunk
           name: 'common',
-          priority: -20, //if module shares multiple cache group , then set it to common by default.
+          priority: -20, //-ve value denotes that it will be in lowest priority
           minSize: 1000,//minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
           type: /javascript/
         }
