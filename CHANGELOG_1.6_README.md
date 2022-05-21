@@ -14,6 +14,7 @@
 4. livereload.js
 
 ### webpack.config.js
+
 ```
 const glob = require('glob');
 const path = require('path'); //get absolute paths
@@ -21,12 +22,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //extract css f
 const CopyPlugin = require("copy-webpack-plugin"); //copy assets p.s, webpack also watch for all the copied files
 const WebpackShellPluginNext = require('webpack-shell-plugin-next'); //execute shell commands
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
-const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warnings
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //clean dist folder after each build
+const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warning
 const liveReloadPlugin = require('./liveReload'); //custom webpack plugin for hotreloading based on theme watch status
 const { VueLoaderPlugin } = require('vue-loader')
 
-const templateEntryPoints = glob.sync('./src/js/bundles/templates/**.js').reduce((acc, path) => {
+const templateEntryPoints = glob.sync('./src/js/bundles/templates/**/**.js').reduce((acc, path) => {
   const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
   acc[entry] = path;
   return acc;
@@ -48,7 +48,7 @@ module.exports = {
   resolve: {
     alias: {
       Styles: path.resolve(__dirname, 'src/styles/'),
-      vue: 'vue/dist/vue.esm.js'
+      vue: 'vue/dist/vue.cjs.js'
     }
   },
   module: {
@@ -81,17 +81,13 @@ module.exports = {
           }
         ]
       },
-      //make sure to keep it last as it'll remove unused packages from node_modules, which removed vue-loader(spent 2 hours on figuring it out)
-      {
-        include: path.resolve(__dirname, "node_modules"),
-        sideEffects: false //external libraries wont treeshake without this, sideEffect refers that each imported modules is a pure function
-      }
     ]
   },
   output: {
+    clean: true,
     filename: './assets/bundle.[name].js',
     path: path.resolve(__dirname, 'dist'),
-    chunkFilename: './assets/bundle.[name].js?h=[hash]' //added hash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
+    chunkFilename: './assets/bundle.[name].js?[chunkhash]' //added chunkhash for dynamically created chunk, else browser wont know if file has been changed and will show cached version.
   },
 
   plugins: [
@@ -122,16 +118,11 @@ module.exports = {
           to: 'layout/[name][ext]'
         },
         {
-          from: 'src/config/**',
-          to: 'config/[name][ext]'
-        },
-        {
           from:'src/assets/**/*',
           to:'assets/[name][ext]',
         }
       ],
     }),
-    new CleanWebpackPlugin(), //this is required as we need to clean the chunks if they are no longer needed
   ],
 
 };
@@ -145,8 +136,8 @@ if (mode === 'development') {
         scripts: ['echo Webpack build in progress...🛠']
       },
       onBuildEnd: {
-        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes','shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme'],
-        parallel: true
+        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes, starting initial deployment','shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme'],
+        parallel: true //this is required to make webpack watch run in background.
       }
     }),
     new liveReloadPlugin() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
@@ -163,22 +154,19 @@ if(mode === 'production') {
         default: false, //override default
         Vendors: {  //create a seperate chunk for vendor
           test: /[\\/]node_modules[\\/]/, //required both / & \ to support cross platform between unix and windows
-          priority: -10, //first priority
-          name: 'vendors',
-          minChunks: 1, //only create chunk for dependencies
-          chunks :'all',
-          minSize: 2000,
-          type: 'js',
-          enforce: true //create chunk for all sync , async and cjs modules
+          name: 'vendors',//only create chunk for dependencies
+          chunks :'all', //create chunk for all sync , async and cjs modules
+          type: /javascript/,
+          enforce: true // ignores minSize: 2000, minChunks: 1,priority: 0,
         },
         common: { //create a common chunk
           chunks: "all", //create chunk for all sync , async and cjs modules
           minChunks: 2, //minimum import for creating chunk
           name: 'common',
-          priority: -20, //only includes the files that are not part of vendor chunk
+          priority: -20, //-ve value denotes that it will be in lowest priority
           minSize: 1000,//minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
-          type: 'js'
-        },
+          type: /javascript/
+        }
       },
     }
   }
@@ -194,19 +182,16 @@ if(mode === 'production') {
   "private": true,
   "main": "webpack.config.js",
   "sideEffects": [
-    "**/**.css",
-    "**/**.scss",
-    "**/**.vue"
+    "*.css",
+    "*.scss",
+    "*.vue"
   ],
   "scripts": {
     "build": "webpack",
     "deploy": "webpack && shopify-themekit deploy",
     "start": " NODE_ENV=development webpack --watch",
     "eslint": "eslint 'src/js/**'",
-    "stylelint": "stylelint '**/*.scss'",
-    "add-all": "git add .",
-    "theme": "shopify-themekit",
-    "initialDeploy": "shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme"
+    "stylelint": "stylelint '**/*.scss'"
   },
   "husky": {
     "hooks": {
@@ -228,34 +213,29 @@ if(mode === 'production') {
     "url": "https://github.com/anattadesign/shopify-starter.git"
   },
   "dependencies": {
-    "@shopify/theme-addresses": "^4.1.1",
-    "@shopify/theme-currency": "^4.1.1",
-    "es6-promise": "^4.2.8",
-    "fs": "^0.0.1-security",
-    "js-cookie": "^2.2.1",
-    "lazysizes": "^5.2.1",
-    "unfetch": "^4.1.0",
-    "vue": "^2.6.14",
-    "vue-loader": "^15.9.6",
-    "vue-template-compiler": "^2.6.14",
-    "yaml": "^1.10.2"
+    "vue": "^3.2.31",
+    "vue-loader": "^17.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
+    "@shopify/theme-addresses": "^4.1.1",
+    "@shopify/theme-currency": "^4.1.1",
     "@shopify/themekit": "^1.1.4",
     "accoutrement": "^2.1.3",
     "autoprefixer": "^10.4.4",
     "babel-loader": "^8.1.0",
     "browser-sync": "^2.27.9",
-    "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
+    "dotenv": "^16.0.0",
     "eslint": "^8.12.0",
+    "fs": "^0.0.1-security",
     "glob": "^7.1.6",
     "husky": "^4.2.5",
     "jquery": "^3.6.0",
+    "lazysizes": "^5.2.1",
     "mini-css-extract-plugin": "^2.6.0",
     "node-sass": "^7.0.1",
     "postcss-loader": "^6.2.1",
@@ -265,9 +245,11 @@ if(mode === 'production') {
     "stylelint-config-standard": "^25.0.0",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
-    "webpack-shell-plugin-next": "^2.2.2"
+    "webpack-shell-plugin-next": "^2.2.2",
+    "yaml": "^1.10.2"
   }
 }
+
 ```
 
 ## .bablrc
