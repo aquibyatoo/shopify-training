@@ -159,23 +159,7 @@ if(mode === 'production') {
           priority: -20, //if module shares multiple cache group , then set it to common by default.
           minSize: 1000,//minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
           type: /javascript/
-        },
-        product: { //create a common chunk
-          test: /[\\/]js[\\/]bundles[\\/]templates[\\/]\sproduct\s[\\/]/, //required both / & \ to support cross platform between unix and windows
-          chunks: "all", //create chunk for all sync , async and cjs modules
-          name: 'product',
-          priority: -10, //only includes the files that are not part of vendor chunk
-          minSize: 1000,//minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
-          type: /javascript/
-        },
-        collection: { //create a common chunk
-          test: /[\\/]js[\\/]bundles[\\/]templates[\\/]\scollection\s[\\/]/, //required both / & \ to support cross platform between unix and windows
-          chunks: "all", //create chunk for all sync , async and cjs modules
-          name: 'collection',
-          priority: -10, //only includes the files that are not part of vendor chunk
-          minSize: 1000,//minimum size that required for creating a chunk, we would not want just few lines of code getting chunked together, so minimum size set to 1kb
-          type: /javascript/
-        },
+        }
       },
     }
   }
