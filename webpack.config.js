@@ -105,6 +105,10 @@ module.exports = {
           to: 'layout/[name][ext]'
         },
         {
+          from: 'src/locales/*.json',
+          to: 'locales/[name][ext]'
+        },
+        {
           from: 'src/config/**',
           to: 'config/[name][ext]'
         },
