@@ -92,7 +92,7 @@ module.exports = {
           to: 'sections/[name][ext]'
         },
         {
-          from: 'src/liquid/templates/**/*.liquid',
+          from: 'src/liquid/templates/**/*.*',
           to: 'templates/[name][ext]'
         },
         {
@@ -104,7 +104,7 @@ module.exports = {
           to: 'locales/[name][ext]'
         },
         {
-          from: 'src/config/**',
+          from: 'src/config/settings_schema.json',
           to: 'config/[name][ext]'
         },
         {

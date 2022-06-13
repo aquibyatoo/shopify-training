@@ -70,7 +70,6 @@ secrets.json
 dist/
 upload/
 config.yml
-src/config/
 
 # Logs
 logs
@@ -136,6 +135,3 @@ yarn.lock
 !.env.example
 
 *.DS_Store
-
-locales/
-config/
