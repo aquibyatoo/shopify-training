@@ -5,9 +5,10 @@ const CopyPlugin = require("copy-webpack-plugin"); //copy assets p.s, webpack al
 const WebpackShellPluginNext = require('webpack-shell-plugin-next'); //execute shell commands
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warning
-const liveReloadPlugin = require('./liveReload'); //custom webpack plugin for hotreloading based on theme watch status
 const { VueLoaderPlugin } = require('vue-loader')
-
+require('dotenv').config();
+const storeUrl = process.env.STORE_URL;
+console.log(storeUrl);
 const templateEntryPoints = glob.sync('./src/js/bundles/templates/**/**.js').reduce((acc, path) => {
   const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
   acc[entry] = path;
@@ -126,11 +127,10 @@ if (mode === 'development') {
         scripts: ['echo Webpack build in progress...🛠']
       },
       onBuildEnd: {
-        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes, starting initial deployment','shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme'],
+        scripts: ['echo Build Complete 📦',`shopify login -s ${storeUrl} && cd dist && shopify theme serve`],
         parallel: true //this is required to make webpack watch run in background.
       }
-    }),
-    new liveReloadPlugin() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
+    })
   );
 }
 
