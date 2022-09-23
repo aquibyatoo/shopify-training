@@ -8,6 +8,7 @@ const stats = mode === 'development' ? 'errors-only' : { children: false }; //hi
 const { VueLoaderPlugin } = require('vue-loader')
 require('dotenv').config();
 const storeUrl = process.env.STORE_URL;
+const themeId = process.env.THEME_ID;
 console.log(storeUrl);
 const templateEntryPoints = glob.sync('./src/js/bundles/templates/**/**.js').reduce((acc, path) => {
   const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
@@ -127,7 +128,7 @@ if (mode === 'development') {
         scripts: ['echo Webpack build in progress...🛠']
       },
       onBuildEnd: {
-        scripts: ['echo Build Complete 📦',`shopify login -s ${storeUrl} && cd dist && shopify theme serve`],
+        scripts: ['echo Build Complete 📦',`shopify login -s ${storeUrl} && cd dist && shopify theme serve -t ${themeId}`],
         parallel: true //this is required to make webpack watch run in background.
       }
     })
