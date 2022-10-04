@@ -69,6 +69,9 @@ large files(3rd party modules) are not loaded every time, which means performanc
 Once files are uploaded to shopify using themekit, browser will autoreload the webpage.
 Check more in here: https://github.com/anattadesign/Shopify-Shell/issues/20
 
+**Shopify CLI:**
+Enable local development capabilities
+
 ## Know Issues
 
 
@@ -77,25 +80,25 @@ Check more in here: https://github.com/anattadesign/Shopify-Shell/issues/20
 
 
 ## System Requirements
-- [Node](https://nodejs.org/en/) (v10.16.3+)
+- [Node](https://nodejs.org/en/) (v14.18.2+)
 - [NPM 5+](https://docs.npmjs.com/try-the-latest-stable-version-of-npm)
-- [Theme Kit](https://shopify.github.io/themekit/)
 
 ## Getting Started
 1. Clone this repo ( git clone git@github.com:anattadesign/shopify-starter.git ), rename the directory to your project.
-2. Open in terminal and and run `npm install` to install all dependencies.
-3. In Shopify, copy the theme ID for the new theme, then update the `<PASSWORD>`, `THEME_ID`, and `STORE_URL` in **config.yml** with your store & theme details.
-4. Your `config.yml` file should look like this: 
-    ```
-    development:
-      password: <PRIVATE_APP_PASSWORD>
-      theme_id: "<THEME_ID>"
-      store: <STORE_URL>
-      directory: dist/
-      ignore_files:
-        - config/settings_data.json
-    ```
-5. Run `npm start` to run your first Webpack build and start watching for file changes to be uploaded to Shopify.
+2. Open in terminal and and run `npm install` or `yarn` to install all dependencies.
+
+### First deployment
+1. Run `npm build` or `yarn build` to create your first Webpack build.
+2. Compress **dist** folder from your local directory.
+3. In Shopify, upload the compressed **dist** folder in Shopify admin through Add Theme option in online store.
+4. Add files to be ignored **.shopifyignore** while deployment.
+5. In Shopify, copy the theme ID for the new theme, then update the `THEME_ID`, and `STORE_URL` in **.env** file.
+6. Run `npm start` or `yarn start` to run your Webpack build and start watching for file changes to be uploaded to Shopify.
+
+### Consequent deployment
+1. Add files to be ignored **.shopifyignore** while deployment.
+2. In Shopify, copy the theme ID for the new theme, then update the `THEME_ID`, and `STORE_URL` in **.env** file.
+3. Run `npm start` or `yarn start` to run your Webpack build and start watching for file changes to be uploaded to Shopify.
 
 ## Configuration
 
@@ -104,17 +107,18 @@ Check more in here: https://github.com/anattadesign/Shopify-Shell/issues/20
 #### Commands
 `npm start` or `yarn start`
 - Completes a Webpack build in **development** mode
+- Choose the partner account your store can be accessed in
 - deloy the initial build to the shopify
 - Webpack begins watching for file changes
-- Theme Kit begins watching for file changes in `dist/`
-- Theme Kit opens your development theme in your default browser
+- Shopify CLI begins watching for file changes in `dist/`
+- Shopify CLI provides you Localhost and store URL
 
 `npm run build` or `yarn build`
 - Completes a Webpack build in **production** mode
 
 `npm run deploy` or `yarn deploy`
 - Completes a Webpack build in **production** mode
-- Deploys and overwrites all theme files via Theme Kit
+- Deploys and overwrites all theme files via Shopify CLI
 
 `npm run eslint` or `yarn eslint`
 - Lint all JavaScript files in `src/js`
@@ -128,13 +132,13 @@ All JavaScript files in the `js/bundles/layouts` and `js/bundles/templates`  dir
 Webpack will generate a JavaScript file for each template and layout file in the `bundles` directory. The CSS files imported in each bundle entry file will also generate CSS files. Webpack will add all output files to `dist/assets`.
 
 
-### Theme Kit
+### Shopify CLI
 
 #### Config
-The Theme Kit configuration file uses `dist` as the root directory for watching files to upload.
+The Shopify CLI configuration file uses `dist` as the root directory for watching files to upload.
 
 #### File Uploads
-When running `npm start`, Webpack will use a plugin that runs `shopify-themekit watch` after a successful build. Webpack will then be set to watch and recompile file changes, and Theme Kit will watch for file changes in the `dist` directory.
+When running `npm start` or `yarn start`, Webpack will use a plugin that runs `shopify login` to login to the partner account for the store and `shopify theme serve` after a successful build. Webpack will then be set to watch and recompile file changes, and Theme Kit will watch for file changes in the `dist` directory.
 
 ## Required Files
 - The layout and template entry files in `src/js/bundles/` are necessary for Webpack to generate the CSS and JavaScript assets for each layout and template. Additional entry files will be required when creating new liquid templates or alternate templates, ie. `page.about.js`.

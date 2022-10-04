@@ -1,6 +1,6 @@
 {
   "name": "Anatta-Shopify-Development",
-  "version": "1.0.0",
+  "version": "1.7.0",
   "description": "Shopify theme development tool.",
   "private": true,
   "main": "webpack.config.js",

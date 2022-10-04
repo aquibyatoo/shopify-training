@@ -5,13 +5,14 @@
 1. Tree Shaking
 2. Common Chunks / Split Chunks
 3. Lazy load files / components
-4. Live reloading - This feature can be activated using env variable (.env)
+4. Live reloading through shopify CLI
 
 ### Required files
 1. webpack.config.js
 2. package.json
 3. .bablrc (File with new content)
-4. livereload.js
+4. Shopify CLI
+5. .shopifyignore
 
 ### webpack.config.js
 
@@ -23,9 +24,11 @@ const CopyPlugin = require("copy-webpack-plugin"); //copy assets p.s, webpack al
 const WebpackShellPluginNext = require('webpack-shell-plugin-next'); //execute shell commands
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 const stats = mode === 'development' ? 'errors-only' : { children: false }; //hide or show warning
-const liveReloadPlugin = require('./liveReload'); //custom webpack plugin for hotreloading based on theme watch status
 const { VueLoaderPlugin } = require('vue-loader')
-
+require('dotenv').config();
+const storeUrl = process.env.STORE_URL;
+const themeId = process.env.THEME_ID;
+console.log(storeUrl);
 const templateEntryPoints = glob.sync('./src/js/bundles/templates/**/**.js').reduce((acc, path) => {
   const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
   acc[entry] = path;
@@ -110,12 +113,20 @@ module.exports = {
           to: 'sections/[name][ext]'
         },
         {
-          from: 'src/liquid/templates/**/*.liquid',
+          from: 'src/liquid/templates/**/*.*',
           to: 'templates/[name][ext]'
         },
         {
           from: 'src/liquid/layout/**/*.liquid',
           to: 'layout/[name][ext]'
+        },
+        {
+          from: 'src/locales/*.json',
+          to: 'locales/[name][ext]'
+        },
+        {
+          from: 'src/config/settings_schema.json',
+          to: 'config/[name][ext]'
         },
         {
           from:'src/assets/**/*',
@@ -136,11 +147,10 @@ if (mode === 'development') {
         scripts: ['echo Webpack build in progress...🛠']
       },
       onBuildEnd: {
-        scripts: ['echo Build Complete 📦','echo Started Watching for a theme changes, starting initial deployment','shopify-themekit deploy && shopify-themekit watch --notify=/tmp/theme.updatetheme'],
+        scripts: ['echo Build Complete 📦',`shopify login -s ${storeUrl} && cd dist && shopify theme serve -t ${themeId}`],
         parallel: true //this is required to make webpack watch run in background.
       }
-    }),
-    new liveReloadPlugin() //Custom webpack plugin for live reloading when theme watch uploads the file to shopify
+    })
   );
 }
 
@@ -172,12 +182,13 @@ if(mode === 'production') {
   }
 }
 
+```
 
 ### Make sure to add your project specific modules/dependencies
 ```
 {
   "name": "Anatta-Shopify-Development",
-  "version": "1.0.0",
+  "version": "1.7.0",
   "description": "Shopify theme development tool.",
   "private": true,
   "main": "webpack.config.js",
@@ -188,8 +199,8 @@ if(mode === 'production') {
   ],
   "scripts": {
     "build": "webpack",
-    "deploy": "webpack && shopify-themekit deploy",
-    "start": " NODE_ENV=development webpack --watch",
+    "deploy": "webpack && cd dist && shopify theme push",
+    "start": "NODE_ENV=development webpack --watch",
     "eslint": "eslint 'src/js/**'",
     "stylelint": "stylelint '**/*.scss'"
   },
@@ -264,95 +275,7 @@ if(mode === 'production') {
   "plugins": ["@babel/plugin-transform-runtime"]
 }
 ```
-
-## livereload.js - include this flag in your .env file to enable local development with hot reloading(LIVE_RELOAD: true)
+## .shopifyignore
 ```
-//dependecies
-const bs = require("browser-sync").create('theme watch');
-const yaml = require('yaml');
-const fs = require('fs');
-require('dotenv').config()
-
-//variables
-let init = false; //flag for init
-let urlString = '';
-
-//get url data from config.yml
-const configs = fs.readFileSync('./config.yml', 'utf8')
-const {development: {store = null, theme_id = null} = {} } = yaml.parse(configs);
-
-//check .env file and get reload flag
-const enableLiveReload = JSON.parse(process.env.LIVE_RELOAD ?? false); //default value set to false
-
-if(enableLiveReload) {
-  urlString = `https://${store}?_ab=0&_fd=0&_sc=1&preview_theme_id=${theme_id}`;
-  }
-  else {
-    urlString = `https://${store}?preview_theme_id=${theme_id}`
-}
-
-//Not using arrow funtion, else "this" will point to window object
-function debounce(func, timeout = 1000){
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => { func.apply(this, args); }, timeout);
-  };
-}
-
-//HMR for css , this is not applicable for us as our css change, our js change as well, interesting idea tho
-// bs.watch("dist/assets/*.css", function (event, file) {
-//   console.log(file,"file");
-//   if (event === "change") {
-//     bs.reload("*.css");
-//   }
-// });
-
-class webpackThemeWatch {
-  _watchChange(){
-    bs.watch("/tmp/theme.updatetheme", function (event, file) {
-      if (event === "change") {
-        debounce(bs.reload());
-      }
-    });
-  }
-
-  _init(){
-    bs.init({
-      proxy: urlString,
-      notify: false,
-      logLevel: "silent",
-      injectChanges: true,
-      snippetOptions: {
-        rule: {
-          match: /<head[^>]*>/i,
-          fn: function(snippet, match) {
-            return match + snippet;
-          }
-        }
-      }
-    }, function() {
-      init = true;
-    });
-  }
-
-  apply(compiler) {
-    compiler.hooks.emit.tap(
-      'Theme Watch',
-      (
-        stats
-      ) => {
-        if(!store || !theme_id) {
-          console.log('\x1b[31m','ERROR: Invalid config.yml');
-          process.exit(1);
-        }
-        !init && this._init();
-        this._watchChange();
-      }
-    );
-  }
-}
-
-module.exports = webpackThemeWatch;
+config/settings_data.json
 ```
-
